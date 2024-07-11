@@ -46,7 +46,7 @@ Carbon\Carbon::setLocale('ar');
 						<a href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
 							<div dir="rtl" class="card m-1" style="width: 25rem;">
 								<div class="videocard">
-								<video src="{{asset('storage/videos/'.$item->video)}}" class="card-img-top videorun "></video>
+								<video style="height: 250px;width: 100%;" src="{{asset('storage/videos/'.$item->video)}}" class="card-img-top videorun "></video>
 	
 								</div>
 								<div class="card-body" >
