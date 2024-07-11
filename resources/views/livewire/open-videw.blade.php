@@ -8,7 +8,7 @@
             <div class="col-md-8 col-12">
                 <div style="width: 100%; height: 600px;" wire:ignore.self>
 
-                    <video controls autoplay style="width: 100%;height: 100%;object-fit: cover"
+                    <video controls autoplay style="width: 100%;height: 100%"
                         src="{{ asset('storage/videos/' . $vi->video) }}"></video>
 
 
@@ -97,7 +97,7 @@
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <video style="width: 100%;object-fit: cover"
+                                    <video style="width: 100%;height: 250px;object-fit: cover"
                                         src="{{ asset('storage/videos/' . $item->video) }}"></video>
                                 </div>
                                 <div class="col-md-8">
