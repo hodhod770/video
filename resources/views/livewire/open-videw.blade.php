@@ -39,14 +39,15 @@
 
                     <div class="col-md-4 col-12">
                         <form wire:submit='Sendcommet' method="post">
-                            <input wire:model='texts' placeholder="اكتب تعليقك هنا ...." type="text"
-                                class="form-control" name="" id="">
+                            <div class="input-group">
+                                <input wire:model='texts' placeholder="اكتب تعليقك هنا ...." type="text" class="form-control" name="" id="">
+                                <div class="input-group-append" style="height: 100%">
+                                    <button type="submit" class="btn btn-primary fa fa-send"> ارسال</button>
+                                </div>
+                            </div>
                             @error('texts')
                                 <span class="error text-danger">{{ $message }}</span>
                             @enderror
-                            <center>
-                                <button type="submit" class="btn btn-primary fa fa-send m-2"> ارسال</button>
-                            </center>
                         </form>
 
                     </div>
