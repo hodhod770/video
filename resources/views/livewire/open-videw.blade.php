@@ -15,6 +15,8 @@
 
 
                 </div>
+                <h1>{{ $vi->name }}</h1>
+
                 <div class="row">
                     <div class="col-md-4 col-12">
                        @if ($feel)
@@ -56,7 +58,6 @@
                 </div>
 
 
-                <h1>{{ $vi->name }}</h1>
                 <p><i class="fa fa-eye"> {{ $vi->watch_num??0 }}</i>  <i class="fa fa fa-thumbs-up"> {{ $vi->like_num??0 }}</i></p>
                 
                 <p>{{ Carbon\Carbon::parse($vi->created_at)->diffForHumans() }}</p>
