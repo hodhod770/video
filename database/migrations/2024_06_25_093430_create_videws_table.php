@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('watch_num')->default(0);
             $table->integer('like_num')->default(0);
             $table->boolean('IsActive')->default(1);
-            $table->integer('id_channal');
+            $table->String('id_channal');
 
             $table->timestamps();
         });

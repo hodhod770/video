@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->String('texts')->nullable();
-            $table->integer('id_v')->default(0);
+            $table->String('id_v')->default(0);
             $table->integer('id_user')->default(0);     
             $table->timestamps();
         });

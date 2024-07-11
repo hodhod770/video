@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('what_user_feels', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_v')->default(0);
+            $table->String('id_v')->default(0);
             $table->integer('id_user')->default(0);  
             $table->integer('feel')->default(0);  //0=no feel  1=like 2=dislike
             $table->timestamps();

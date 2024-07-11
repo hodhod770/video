@@ -78,7 +78,7 @@
                                             flex-wrap: nowrap;">
                                 <img style="width: 50px; height: 50px;" src="{{ asset('person.png') }}" alt="">
                                 <br>
-                                <h6 style="transform: translateY(-27px);">{{ $item->user->name }}</h6>
+                                <h6 style="transform: translateY(-27px);">{{ $item->user->name??"" }}</h6>
                             </div>
 
                             <div class="col-8" style="text-align: center">
@@ -102,8 +102,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $item->name }}</h5>
-                                        <p class="card-text">{{ $item->summary }}</p>
+                                        <h5 class="card-title">{{ $item->name??"" }}</h5>
+                                        <p class="card-text">{{ $item->summary??"" }}</p>
                                         <p class="card-text"><small
                                                 class="text-muted">{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</small>
                                         </p>
