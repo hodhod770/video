@@ -27,7 +27,7 @@ class OpenVidew extends Component
         $feel=WhatUserFeel::where('id_v',$this->id)->where('id_user',session()->get('UAuth')->id??0)->first();
 
         $v=Videws::where('uname',$this->id)->first();
-        $v->video++;
+        $v->watch_num++;
         $v->save();
         $likesv=Videws::where('type',$v->type)->orwhere('id_channal',$v->id_channal)->get();
         $comment=Comment::where('id_v',$this->id)->Orderby('id','desc')->get();
