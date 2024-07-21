@@ -40,5 +40,7 @@ Route::middleware(['authUser'])->group(function () {
 });
 
 Route::get('/Openv/{id}', [EndUser::class, 'Openv'])->name('Openv');
+Route::get('/Openc/{id}', [EndUser::class, 'Openc'])->name('Openc');
 Route::get('/video/{filename}', [EndUser::class, 'VideoRun'])->name('video.show');
 Route::get('/search', [EndUser::class, 'Search'])->name('search');
+Route::get('/Listchannel', [EndUser::class, 'Listchannel'])->name('Listchannel');

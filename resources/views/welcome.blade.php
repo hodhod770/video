@@ -24,12 +24,16 @@ Carbon\Carbon::setLocale('ar');
 							</div>
 							<div class="shop-body">
 								<h3>{{$item->name}}</h3>
-								<a href="#" class="cta-btn">زيارة القناة <i class="fa fa-arrow-circle-left"></i></a>
+								<a href="{{route('Openc',['id'=>$item->uname])}}" class="cta-btn">زيارة القناة <i class="fa fa-arrow-circle-left"></i></a>
 							</div>
 						</div>
 					</div>
 					@endforeach
 					<!-- /shop -->
+
+					<center>
+						<a href="{{route('Listchannel')}}">عرض كل القنوات</a>
+					</center>
 
 				</div>
 				<!-- /row -->
@@ -74,6 +78,8 @@ Carbon\Carbon::setLocale('ar');
 			</div>
 		</div>
 
+		
+
 
     
 
@@ -113,7 +119,7 @@ Carbon\Carbon::setLocale('ar');
 		</div>
 		<!-- /NEWSLETTER -->
 
-		<script>
+		{{-- <script>
 			document.addEventListener('DOMContentLoaded', function () {
 				const video = document.querySelector('.videorun');
 				const card = document.querySelector('.card');
@@ -144,5 +150,5 @@ Carbon\Carbon::setLocale('ar');
 				window.addEventListener('resize', checkVideoInView);
 		});
 
-</script>
+</script> --}}
 @endsection

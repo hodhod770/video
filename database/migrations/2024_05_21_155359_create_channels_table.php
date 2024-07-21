@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('channels', function (Blueprint $table) {
             $table->id();
             $table->String('image');
+            $table->String('bgimage');
             $table->String('name')->nullable();
             $table->String('uname')->unique();
             $table->Text('desc',15000)->nullable();

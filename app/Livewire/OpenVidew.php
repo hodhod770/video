@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Videws;
 use App\Models\Comment;
 use App\Models\WhatUserFeel;
+use App\Models\Participants;
+use App\Models\Channel;
 
 class OpenVidew extends Component
 {
@@ -25,13 +27,14 @@ class OpenVidew extends Component
     public function render()
     {
         $feel=WhatUserFeel::where('id_v',$this->id)->where('id_user',session()->get('UAuth')->id??0)->first();
-
+        
         $v=Videws::where('uname',$this->id)->first();
+        $Part=Participants::where('id_c',$v->id_channal)->where('id_user',session()->get('UAuth')->id??0)->first();
         $v->watch_num++;
         $v->save();
         $likesv=Videws::where('type',$v->type)->orwhere('id_channal',$v->id_channal)->get();
         $comment=Comment::where('id_v',$this->id)->Orderby('id','desc')->get();
-        return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel]);
+        return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel,'Part'=>$Part]);
     }
 
     public function Sendcommet()
@@ -130,6 +133,50 @@ class OpenVidew extends Component
 
         }
         
+    }
+
+    public function Participants()
+    {
+        if(session('UAuth'))
+        {
+            $chann=Videws::where('uname',$this->id)->first();
+            $d=Participants::where('id_c',$chann->id_channal)->where('id_user',session()->get('UAuth')->id)->first();
+            $ch=Channel::where('uname',$chann->id_channal)->first();
+            // dd($d);
+        if($d)
+        {
+
+            $d->stute=!$d->stute;
+            if ($d->stute) {
+                $ch->subscription++;
+            }
+            else
+            {
+                $ch->subscription--;
+
+            }
+            $d->save();
+        }
+        else
+        {
+            $ch->subscription++;
+            
+            $data=new Participants();
+            $data->id_c=$chann->id_channal;
+            $data->id_user=session()->get('UAuth')->id;
+            $data->save();
+        }
+        $ch->save();
+
+    }
+    else
+    {
+        return redirect('userlogin');
+
+    }
+
+        
+
     }
     
 }

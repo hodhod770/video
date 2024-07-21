@@ -11,6 +11,7 @@ class UserDashbord extends Component
 {
     use WithFileUploads;
     public $imageChanal;
+    public $bgimageChanal;
     public $name;
     public $desc;
     public function render()
@@ -25,8 +26,15 @@ class UserDashbord extends Component
         $extension = $this->imageChanal->getClientOriginalExtension();
         $uniqueFilename = uniqid() . '.' . $extension;
         $path = $this->imageChanal->storeAs('public/photos', $uniqueFilename);
+
+        $bgoriginalFilename = $this->bgimageChanal->getClientOriginalName();
+        $extension = $this->bgimageChanal->getClientOriginalExtension();
+        $bguniqueFilename = uniqid() . '.' . $extension;
+        $path = $this->bgimageChanal->storeAs('public/photos', $bguniqueFilename);
+
         $d=new Channel();
         $d->image=$uniqueFilename;
+        $d->bgimage=$bguniqueFilename;
         $d->name=$this->name;
         $uuid = (string) Str::uuid();
         $d->uname=$uuid;
