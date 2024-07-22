@@ -17,7 +17,8 @@
                         class="fa fa-date">{{ Carbon\Carbon::parse($vi->created_at)->diffForHumans() }}</i></p>
 
                 <div class="row">
-                    <div class="col-md-4 col-12">
+
+                    <div class="col-md-4 col-6">
                         @if ($feel)
                             @if ($feel->feel == 0)
                                 <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'>
@@ -34,17 +35,6 @@
                                     اعجاب</button>
                                 <button class=" m-1 btn btn-danger fa fa-thumbs-down" wire:click='editefeel(0)'> تم
                                     تسجيل استيائك </button>
-                    <div class="col-md-4 col-6">
-                       @if ($feel)
-                            @if ($feel->feel==0)
-                            <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'> اعجاب</button>
-                            <button class=" m-1 btn btn-primary fa fa-thumbs-down" wire:click='editefeel(2)'> سيئ</button>
-                            @elseif($feel->feel==1)
-                            <button class=" m-1 btn btn-success fa fa-thumbs-up" wire:click='editefeel(0)'> تم تسجيل اعجابك </button>
-                            <button class=" m-1 btn btn-primary fa fa-thumbs-down" wire:click='editefeel(2)'> سيئ</button>
-                            @elseif($feel->feel==2)
-                            <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'> اعجاب</button>
-                            <button class=" m-1 btn btn-danger fa fa-thumbs-down" wire:click='editefeel(0)'> تم تسجيل استيائك </button>
                             @endif
                         @else
                             <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'>
@@ -55,29 +45,50 @@
                     </div>
                     <div class="col-md-4 col-0">
                         <center>
-    
+
                         </center>
                     </div>
-                    <div class="col-md-4 col-6" >
-                      
-                        
-                        <div style="display: flex;flex-wrap: wrap;align-content: flex-start;justify-content: flex-start;align-items: flex-end;flex-direction: row;margin: 41pz;">
-                            <img style="border-radius: 50%;width: 50px; height: 50px;"  src="{{asset('storage/photos/'.$vi->channle->image)}}" alt="">
-                        
-                        
-                            <p style="margin: 17px">{{$vi->channle->name}}</p>
-                        
+                    <div class="col-md-4 col-6">
+
+
+                        <div
+                            style="display: flex;flex-wrap: wrap;align-content: center;justify-content: center;align-items: center;margin: 41pz;flex-direction: row;">
+                            <img style="border-radius: 50%;width: 50px; height: 50px;"
+                                src="{{ asset('storage/photos/' . $vi->channle->image) }}" alt="">
+
+
+                            <p style="margin: 17px">{{ $vi->channle->name }}</p>
+
+
                         </div>
-                        <button class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب القناة</button>
-                       
+                        @if ($Part)
+                            @if ($Part->stute == 1)
+                                <center>
+                                    <button wire:click='Participants' class=" m-1 btn btn-info fa fa-bell"> الغاء
+                                        الاشتراك ب القناة</button>
+                                </center>
+                            @else
+                                <center>
+                                    <button wire:click='Participants' class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب
+                                        القناة</button>
+                                </center>
+                            @endif
+                        @else
+                            <center>
+                                <button wire:click='Participants' class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب
+                                    القناة</button>
+                            </center>
+                        @endif
+
+
                     </div>
 
                 </div>
-                
 
 
-                
-                
+
+
+
                 <p>{{ $vi->summary }}</p>
                 <p>{{ $vi->description }}</p>
 
@@ -100,36 +111,17 @@
 
                     </div>
 
-                    <div class="col-md-4 col-12">
-                        @if ($Part)
-                            @if ($Part->stute==1)
-                            <center>
-                                <button wire:click='Participants' class=" m-1 btn btn-info fa fa-bell"> الغاء الاشتراك ب القناة</button>
-                            </center> 
-                            @else
-                            <center>
-                                <button wire:click='Participants' class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب القناة</button>
-                            </center>
-                            @endif
-                        @else
-                            <center>
-                                <button wire:click='Participants' class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب القناة</button>
-                            </center>
-                        @endif
-                    </div>
+
                 </div>
 
 
 
 
-                <p>{{ $vi->summary }}</p>
-                <p>{{ $vi->description }}</p>
 
                 <div style="height: 50px"></div>
                 <hr>
                 <div class="row">
                     @foreach ($comment as $item)
-                @foreach ($comment as $item)
                         <div class="col-md-6 col-12">
                             <div class="row">
                                 <div class="col-4"

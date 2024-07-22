@@ -17,7 +17,7 @@
                     <img src="{{asset('storage/photos/'.$ch->image)}}" style="width: 200px; height: 200px; border-radius: 50%;border: 1px solid #000000;" alt="">
                 </div>
 
-                <div class="col-md-6 col-12 m-1" >
+                <div class="col-md-6 col-12 m-3" >
 
                     <h1 class="text-dark">{{$ch->name}}</h1>
                     <p class="text-dark"><i class="fa fa-user"></i> {{$ch->subscription}}  <i class="fa fa-video-camera"></i> {{count($video)}} </p>
