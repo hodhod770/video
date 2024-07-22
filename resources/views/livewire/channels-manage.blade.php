@@ -43,7 +43,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="POST" wire:submit='Store' enctype="multipart/form-data">
+            <form method="POST" wire:submit='Store' >
               
                     <div dir="rtl" class="p-2" x-data="{ uploading: false, progress: 0 }"
                     x-on:livewire-upload-start="uploading = true"

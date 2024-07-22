@@ -19,7 +19,7 @@
                 <p><i class="fa fa-eye"> {{ $vi->watch_num??0 }}</i>  <i class="fa fa fa-thumbs-up"> {{ $vi->like_num??0 }}</i> <i class="fa fa-date">{{ Carbon\Carbon::parse($vi->created_at)->diffForHumans() }}</i></p>
 
                 <div class="row">
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-6">
                        @if ($feel)
                             @if ($feel->feel==0)
                             <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'> اعجاب</button>
@@ -36,8 +36,38 @@
                        <button class=" m-1 btn btn-primary fa fa-thumbs-down" wire:click='editefeel(2)'> سيئ</button>
                        @endif
                     </div>
+                    <div class="col-md-4 col-0">
+                        <center>
+    
+                        </center>
+                    </div>
+                    <div class="col-md-4 col-6" >
+                      
+                        
+                        <div style="display: flex;flex-wrap: wrap;align-content: flex-start;justify-content: flex-start;align-items: flex-end;flex-direction: row;margin: 41pz;">
+                            <img style="border-radius: 50%;width: 50px; height: 50px;"  src="{{asset('storage/photos/'.$vi->channle->image)}}" alt="">
+                        
+                        
+                            <p style="margin: 17px">{{$vi->channle->name}}</p>
+                        
+                        </div>
+                        <button class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب القناة</button>
+                       
+                    </div>
 
-                    <div class="col-md-4 col-12">
+                </div>
+                
+
+
+                
+                
+                <p>{{ $vi->summary }}</p>
+                <p>{{ $vi->description }}</p>
+
+                <div style="height: 50px"></div>
+                <hr>
+                <div class="row">
+                    <div class="col-12 p-2 m-2">
                         <form wire:submit='Sendcommet' method="post">
                             <div class="input-group">
                                 <input wire:model='texts' placeholder="اكتب تعليقك هنا ...." type="text" class="form-control" name="" id="">
@@ -52,22 +82,6 @@
 
                     </div>
 
-                    <div class="col-md-4 col-12">
-                        <center>
-                            <button class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب القناة</button>
-                        </center>
-                    </div>
-                </div>
-
-
-                
-                
-                <p>{{ $vi->summary }}</p>
-                <p>{{ $vi->description }}</p>
-
-                <div style="height: 50px"></div>
-                <hr>
-                <div class="row">
                 @foreach ($comment as $item)
                         <div class="col-md-6 col-12">
                             <div class="row">

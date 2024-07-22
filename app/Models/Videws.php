@@ -13,4 +13,9 @@ class Videws extends Model
     {
         return $this->belongsTo(Dept::class,'type');
     }
+
+    public function channle()
+    {
+        return $this->belongsTo(Channel::class,'id_channal','uname');
+    }
 }

@@ -21,6 +21,7 @@ class UserDashbord extends Component
 
     public function AddChannel()
     {
+        // dd($this->imageChanal);
         $originalFilename = $this->imageChanal->getClientOriginalName();
         $extension = $this->imageChanal->getClientOriginalExtension();
         $uniqueFilename = uniqid() . '.' . $extension;
