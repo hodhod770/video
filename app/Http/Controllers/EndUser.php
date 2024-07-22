@@ -15,6 +15,16 @@ class EndUser extends Controller
         return view('openvideo',['id'=>$id]);
     }
 
+    public function Openc($id)
+    {
+        return view('openchannl',['id'=>$id]);
+    }
+
+    public function Listchannel()
+    {
+        return view('listchannels');
+    }
+
     public function VideoRun($f)
     {
         $filename=Videws::where('uname',$f)->first()->video;
