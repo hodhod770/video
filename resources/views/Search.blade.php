@@ -11,7 +11,7 @@ Carbon\Carbon::setLocale('ar');
             <div class="card mb-3" >
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <video style="width: 100%;object-fit: cover"
+                        <video style="width: 100%;height: 150px;object-fit: cover"
                             src="{{ asset('storage/videos/' . $item->video) }}"></video>
                     </div>
                     <div class="col-md-8">
