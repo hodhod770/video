@@ -13,7 +13,7 @@
     <div class="section" dir="rtl">
         <div class="container">
             <div class="row p-2" style="align-items: flex-end;display: flex;" style="width: 100%;">
-                <div class="col-lg-2 col-sm-4 col-12">
+                <div class=" col-12">
                     <img src="{{asset('storage/photos/'.$ch->image)}}" style="width: 200px; height: 200px; border-radius: 50%;border: 1px solid #000000;" alt="">
                 </div>
 
@@ -24,7 +24,7 @@
                     <p>{{$ch->desc}}</p>
                 </div>
 
-                <div class="col-lg-2 col-sm-4 col-12">
+                <div class=" col-12">
                     
                         @if ($Part)
                             @if ($Part->stute==1)
