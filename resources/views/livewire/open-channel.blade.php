@@ -55,7 +55,7 @@
 					@foreach ($video as $item)
 					<div class="col-lg-6 col-12">
 						<a href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
-							<div dir="rtl" class="card m-1" style="width: 25rem;">
+							<div dir="rtl" class="card m-1" style="width: 20rem;">
 								<div class="videocard">
 								<video style="height: 250px;width: 100%;" src="{{asset('storage/videos/'.$item->video)}}" class="card-img-top videorun "></video>
 	
