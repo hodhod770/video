@@ -95,20 +95,20 @@
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
 								<!-- Wishlist -->
-								<div>
+								{{-- <div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
 										<span>مفضلاتك</span>
 										<div class="qty">2</div>
 									</a>
-								</div>
+								</div> --}}
 								<!-- /Wishlist -->
 
 								<div>
 									<a href="{{route('userlogin')}}">
-										<i class="fa fa-person"></i>
+										<i class="fa fa-user"></i>
 										<span>حسابك</span>
-										<div class="qty">2</div>
+										<div class="qty">0</div>
 									</a>
 								</div>
 								<!-- /Cart -->
