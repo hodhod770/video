@@ -125,11 +125,11 @@
             <form method="POST" action="{{route('login')}}">
                 @csrf
                 <label for="chk" aria-hidden="true">تسجيل الدخول</label>
-                <input type="text" name="email" placeholder="البريد الالكتروني" required="">
+                <input required type="text" name="email" placeholder="البريد الالكتروني" required="">
                 @error('email')
                     <span style="text-align: center; color: red">لا يوجد هذا البريد</span>
                 @enderror
-                <input type="password" name="password" placeholder="كلمة السر" required="">
+                <input required type="password" name="password" placeholder="كلمة السر" required="">
                 @error('password')
                 <span style="text-align: center; color: red">كلمة ال خطاء</span>
                  @enderror
