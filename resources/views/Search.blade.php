@@ -5,7 +5,7 @@
 Carbon\Carbon::setLocale('ar');
 @endphp
     <!-- container -->
-    <div dir="rtl" class="">
+    <div dir="rtl" class="m-1">
         @foreach ($results as $item)
         <a href="{{ route('Openv', ['id' => $item->uname]) }}" style="text-decoration: none">
             <div class="card mb-3" >
