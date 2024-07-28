@@ -8,7 +8,7 @@ Carbon\Carbon::setLocale('ar');
     <div dir="rtl" class="m-3">
         @foreach ($results as $item)
         <a href="{{ route('Openv', ['id' => $item->uname]) }}" style="text-decoration: none">
-            <div class="card mb-3" style="background-color: transparent">
+            <div class=" mb-3" style="background-color: transparent">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <video style="width: 100%;height: 300px;object-fit: cover"
