@@ -53,7 +53,7 @@
 				@if (count($video)>0)
                 <div class="row p-1">
 					@foreach ($video as $item)
-					<div class="col-lg-6 col-md-4 col-12">
+					<div class="col-lg-4 m-4 col-12">
 						<a href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
 							<div dir="rtl" class="card m-1" style="width: 25rem;">
 								<div class="videocard">
