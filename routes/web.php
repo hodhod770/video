@@ -44,3 +44,6 @@ Route::get('/Openc/{id}', [EndUser::class, 'Openc'])->name('Openc');
 Route::get('/video/{filename}', [EndUser::class, 'VideoRun'])->name('video.show');
 Route::get('/search', [EndUser::class, 'Search'])->name('search');
 Route::get('/Listchannel', [EndUser::class, 'Listchannel'])->name('Listchannel');
+Route::get('/SendEmail', [EndUser::class, 'SendEmail'])->name('SendEmail');
+Route::get('/PasswordForget', [UserAuth::class, 'PasswordForget'])->name('PasswordForget');
+Route::get('/sendemailforgetpassword/{EMAIL}', [UserAuth::class, 'sendemailforgetpassword'])->name('sendemailforgetpassword');

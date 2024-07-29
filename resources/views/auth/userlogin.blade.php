@@ -282,9 +282,9 @@ footer a {
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>او الدخول عبر</span>
-			<input name="name" type="text" placeholder="اسمك" />
-			<input name="email" type="email" placeholder="البريد الالكتروني" />
-			<input name="password" type="password" placeholder="كلمة السر" />
+			<input required name="name" type="text" placeholder="اسمك" />
+			<input required name="email" type="email" placeholder="البريد الالكتروني" />
+			<input required name="password" type="password" placeholder="كلمة السر" />
 			<button type="submit">انشاء حساب</button>
 		</form>
 	</div>
@@ -298,9 +298,9 @@ footer a {
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>او الدخول عبر</span>
-			<input name="email" type="email" placeholder="البريد الالكتروني" />
-			<input name="password" type="password" placeholder="كلمة السر" />
-			<a href="#">هل نسيت كلمة السر</a>
+			<input required name="email" type="email" placeholder="البريد الالكتروني" />
+			<input required name="password" type="password" placeholder="كلمة السر" />
+			<a href="{{route('PasswordForget')}}">هل نسيت كلمة السر</a>
 			<button type="submit">تسجيل الدخول</button>
 		</form>
 	</div>

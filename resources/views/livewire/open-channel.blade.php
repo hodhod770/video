@@ -13,18 +13,18 @@
     <div class="section" dir="rtl">
         <div class="container">
             <div class="row p-2" style="align-items: flex-end;display: flex;" style="width: 100%;">
-                <div class="col-md-2 col-12">
+                <div class=" col-12">
                     <img src="{{asset('storage/photos/'.$ch->image)}}" style="width: 200px; height: 200px; border-radius: 50%;border: 1px solid #000000;" alt="">
                 </div>
 
-                <div class="col-md-6 col-12 m-1" >
+                <div class="col-lg-6 col-sm-4 col-12 m-3" >
 
                     <h1 class="text-dark">{{$ch->name}}</h1>
                     <p class="text-dark"><i class="fa fa-user"></i> {{$ch->subscription}}  <i class="fa fa-video-camera"></i> {{count($video)}} </p>
                     <p>{{$ch->desc}}</p>
                 </div>
 
-                <div class="col-md-2 col-12">
+                <div class=" col-12">
                     
                         @if ($Part)
                             @if ($Part->stute==1)
@@ -53,9 +53,9 @@
 				@if (count($video)>0)
                 <div class="row p-1">
 					@foreach ($video as $item)
-					<div class="col-md-4 col-12">
+					<div class="col-lg-4 col-12">
 						<a href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
-							<div dir="rtl" class="card m-1" style="width: 25rem;">
+							<div dir="rtl" class="card m-1" >
 								<div class="videocard">
 								<video style="height: 250px;width: 100%;" src="{{asset('storage/videos/'.$item->video)}}" class="card-img-top videorun "></video>
 	

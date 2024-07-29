@@ -5,13 +5,13 @@
 Carbon\Carbon::setLocale('ar');
 @endphp
     <!-- container -->
-    <div dir="rtl" class="container">
+    <div dir="rtl" class="m-3">
         @foreach ($results as $item)
         <a href="{{ route('Openv', ['id' => $item->uname]) }}" style="text-decoration: none">
-            <div class="card mb-3" >
+            <div class="card mb-3" style="background-color: transparent;border: none">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <video style="width: 100%;object-fit: cover"
+                        <video style="width: 100%;height: 300px;object-fit: cover"
                             src="{{ asset('storage/videos/' . $item->video) }}"></video>
                     </div>
                     <div class="col-md-8">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Videws;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+
 class EndUser extends Controller
 {
     //
@@ -66,4 +67,6 @@ class EndUser extends Controller
             ->get();
         return view('Search',['results'=>$results]);
     }
+
+    
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UsersOFAll;
 use Hash;
+use App\Http\Controllers\Authsend;
+
 class UserAuth extends Controller
 {
     public function ShowAuth()
@@ -28,7 +30,7 @@ class UserAuth extends Controller
         session()->put('CreateUserErorr','هذا الايميل موجود ب الفعل');
         return back();
        }
-
+    
         $d=new UsersOFAll();
         $d->name=$request->name;
         $d->email=$request->email;
@@ -42,11 +44,20 @@ class UserAuth extends Controller
        
         $user = UsersOFAll::where('email', $request->email)->first();
         if ($user && Hash::check($request->password, $user->password)) {
-            // Log the user in
-            session()->put('UAuth',$user);
-
-            // Redirect to the intended page
-            return redirect()->intended('dashboard')->with('success', 'Logged in successfully!');
+            if ($user->IsEmailAuth==1) {
+                // Log the user in
+                session()->put('UAuth',$user);
+                return redirect()->intended('dashboard')->with('success', 'Logged in successfully!');
+            }
+            else {
+                session()->put('UAuth_not_auth',$user);
+                $au=new Authsend();
+                $code=$au->SendEmail($user->name,$user->email);
+                session()->put('usercode',$code);
+                return view('auth.codeauth');
+              
+            }
+            
         } else {
             // Authentication failed
             return back()->withErrors(['email' => 'تأكد من كتابة البريد الاكتروني او كلمة السر بشكل صحيح']);
@@ -54,7 +65,16 @@ class UserAuth extends Controller
         
     }
 
+    public function PasswordForget()
+    {
+        return view('auth.forgetpass');
+    }
 
+    public function sendemailforgetpassword($email)
+    {
+        $u=UsersOFAll::where()->first();
+        return view('auth.codeauth');
+    }
     public function showChannal($id)
     {
         if(session('UAuth'))

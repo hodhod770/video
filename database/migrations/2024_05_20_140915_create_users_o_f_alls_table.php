@@ -17,6 +17,7 @@ return new class extends Migration
             $table->String('email');
             $table->String('password');
             $table->boolean('IsActive')->default(1);
+            $table->boolean('IsEmailAuth')->default(0);
             $table->timestamps();
         });
     }

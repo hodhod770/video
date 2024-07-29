@@ -47,8 +47,8 @@ Carbon\Carbon::setLocale('ar');
 				<div class="row p-1">
 					@foreach ($Videws20 as $item)
 					<div class="col-md-4 col-12">
-						<a href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
-							<div dir="rtl" class="card m-1" style="width: 25rem;">
+						<a class="m-1" href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
+							<div dir="rtl" class="card m-1">
 								<div class="videocard">
 								<video style="height: 250px;width: 100%;" src="{{asset('storage/videos/'.$item->video)}}" class="card-img-top videorun "></video>
 	
