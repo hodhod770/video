@@ -1,6 +1,9 @@
 <div>
     <div class="section" dir="rtl">
         <div class="container">
+            <center>
+                <input type="text" class="form-control" wire:model.live='texts' placeholder="البحث عن قناة...." style="width: 30%" name="" id="">
+            </center>
             <div class="row">
                 <h3>القنوات</h3>
                 @foreach ($channels as $item)
