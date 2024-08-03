@@ -9,8 +9,9 @@
                     <h4>ادخل بريدك الالكتروني</h4>
                     {{-- <p>تم ارسال الرمز الى {{session()->get('UAuth_not_auth')->email}}</p> --}}
                     {{-- {{$code}} --}}
-                    <form action="" method="post">
-                        <input required style="width: 400px" type="email" class="form-control" name="emil" id="">
+                    <form action="{{route('sendemailforgetpassword')}}" method="post">
+                        @csrf
+                        <input required style="width: 400px" type="email" class="form-control" name="email" id="">
                        
                     <button type="submit" class="btn btn-primary m-2">ارسال رمز التحقق</button>
                     <br>

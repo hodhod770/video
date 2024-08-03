@@ -46,4 +46,4 @@ Route::get('/search', [EndUser::class, 'Search'])->name('search');
 Route::get('/Listchannel', [EndUser::class, 'Listchannel'])->name('Listchannel');
 Route::get('/SendEmail', [EndUser::class, 'SendEmail'])->name('SendEmail');
 Route::get('/PasswordForget', [UserAuth::class, 'PasswordForget'])->name('PasswordForget');
-Route::get('/sendemailforgetpassword/{EMAIL}', [UserAuth::class, 'sendemailforgetpassword'])->name('sendemailforgetpassword');
+Route::post('/sendemailforgetpassword', [UserAuth::class, 'sendemailforgetpassword'])->name('sendemailforgetpassword');

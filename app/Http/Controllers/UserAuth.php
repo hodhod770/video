@@ -70,10 +70,16 @@ class UserAuth extends Controller
         return view('auth.forgetpass');
     }
 
-    public function sendemailforgetpassword($email)
+    public function sendemailforgetpassword(Request $request)
     {
-        $u=UsersOFAll::where()->first();
+        // dd($request->email);
+        $u=UsersOFAll::where('email',$request->email)->first();
+        session()->put('UAuth_not_auth',$u);
+        $au=new Authsend();
+        $code=$au->SendEmail($u->name,$u->email);
+        session()->put('usercode',$code);
         return view('auth.codeauth');
+       
     }
     public function showChannal($id)
     {
