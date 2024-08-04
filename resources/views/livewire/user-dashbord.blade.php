@@ -112,7 +112,7 @@
     </div>
 
 
-    <div class="modal fade" id="editeuserdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" wire:ignore.self id="editeuserdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -120,16 +120,16 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-             <form action="" method="post">
+             <form wire:submit='ChangeUserName' method="post">
                 <label for="" class="form-lable">ادخل الاسم الجديد</label>
-                <input type="text" class="form-control" name="" id="">
-                <button type="submit" class="btn btn-primary">تعديل الاسم</button>
+                <input wire:model='username' type="text" class="form-control" name="" id="">
+                <button type="submit" class="m-1 btn btn-primary">تعديل الاسم</button>
              </form>
 
-             <form action="" method="post">
+             <form wire:submit='ChangeUserPassword' method="post">
                 <label for="" class="form-lable">ادخل كلمة السر الجديدة</label>
-                <input type="password"  class="form-control" name="" id="">
-                <button type="submit" class="btn btn-primary">تعديل كلمة السر</button>
+                <input wire:model='usernewpass' type="password"  class="form-control" name="" id="">
+                <button type="submit" class="m-1 btn btn-primary">تعديل كلمة السر</button>
 
              </form>
              

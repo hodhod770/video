@@ -7,7 +7,7 @@ use App\Models\Channel;
 use App\Models\UsersOFAll;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
-
+use Hash;
 class UserDashbord extends Component
 {
     use WithFileUploads;
@@ -15,6 +15,9 @@ class UserDashbord extends Component
     public $bgimageChanal;
     public $name;
     public $desc;
+
+    public $username;
+    public $usernewpass;
     public function render()
     {
         $d=Channel::Where('Userid',session()->get('UAuth')->id)->get();
@@ -46,6 +49,22 @@ class UserDashbord extends Component
         $d->save();
         $this->reset();
         
+    }
+
+    public function ChangeUserName()
+    {
+       $u= UsersOFAll::find(session()->get('UAuth')->id);
+       $u->name=$this->username;
+       $u->save();
+       
+    }
+
+    public function ChangeUserPassword()
+    {
+       $u= UsersOFAll::find(session()->get('UAuth')->id);
+       $u->password=Hash::make($this->usernewpass);
+       $u->save();
+       
     }
 
 }
