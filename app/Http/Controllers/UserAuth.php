@@ -72,7 +72,7 @@ class UserAuth extends Controller
 
     public function sendemailforgetpassword(Request $request)
     {
-        // dd($request->email);
+        dd($request->email);
         $u=UsersOFAll::where('email',$request->email)->first();
         if ($u) {
             session()->put('UAuth_not_auth',$u);
