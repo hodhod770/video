@@ -50,6 +50,7 @@ class UserDashbord extends Component
         $this->reset();
         
     }
+    
 
     public function ChangeUserName()
     {
