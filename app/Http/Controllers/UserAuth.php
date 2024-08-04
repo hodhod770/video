@@ -74,7 +74,7 @@ class UserAuth extends Controller
     {
         // dd($request->email);
         $u=UsersOFAll::where('email',$request->email)->first();
-        if (count($u)>0) {
+        if ($u) {
             session()->put('UAuth_not_auth',$u);
             $au=new Authsend();
             $code=$au->SendEmail($u->name,$u->email);
