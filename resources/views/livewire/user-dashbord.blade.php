@@ -122,7 +122,7 @@
             <div class="modal-body">
              <form wire:submit='ChangeUserName' method="post">
                 <label for="" class="form-lable">ادخل الاسم الجديد</label>
-                <input wire:model='username' type="text" class="form-control" name="" id="">
+                <input wire:model='username' value="{{$user->name}}" type="text" class="form-control" name="" id="">
                 <button type="submit" class="m-1 btn btn-primary">تعديل الاسم</button>
              </form>
 
