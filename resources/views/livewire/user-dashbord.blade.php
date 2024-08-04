@@ -9,6 +9,12 @@
                     <div class=" col-12">
                         البريد الالكتروني:{{$user->email}}
                     </div>
+
+                    <div class=" col-12">
+                      <button class="btn btn-primary">
+                        تعديل البيانات
+                      </button>
+                    </div>
                 </div>
             </div>
             <div class="col-12" style="margin: 3px">
