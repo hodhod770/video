@@ -74,10 +74,13 @@ class UserAuth extends Controller
     {
         // dd($request->email);
         $u=UsersOFAll::where('email',$request->email)->first();
-        session()->put('UAuth_not_auth',$u);
-        $au=new Authsend();
-        $code=$au->SendEmail($u->name,$u->email);
-        session()->put('usercode',$code);
+        if (count($u)) {
+            session()->put('UAuth_not_auth',$u);
+            $au=new Authsend();
+            $code=$au->SendEmail($u->name,$u->email);
+            session()->put('usercode',$code);
+        }
+       
         return view('auth.codeauth');
        
     }

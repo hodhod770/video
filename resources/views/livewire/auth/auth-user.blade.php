@@ -126,7 +126,7 @@
                 منصة الهدهد ترحب بكم
             </div>
             @if ($Login)
-                <form action="{{ route('userlogin') }}" dir="rtl" class="p-3 mt-3">
+                <form action="{{ route('userlogin') }}" method="POST" dir="rtl" class="p-3 mt-3">
                     @csrf
                     <div class="form-field d-flex align-items-center">
                         <span class="far fa-user"></span>
@@ -143,11 +143,11 @@
                         class="m-1"  style="color: #039BE5; cursor: pointer;">انشاء حساب جديد</div>
                 </div>
             @else
-                <form action="{{ route('CreateU') }}" dir="rtl" class="p-3 mt-3">
+                <form action="{{ route('CreateU') }}" method="POST" dir="rtl" class="p-3 mt-3">
                     @csrf
                     <div class="form-field d-flex align-items-center">
                         <span class="far fa-user"></span>
-                        <input required type="text" name="email" id="userName" placeholder="اسمك الرباعي">
+                        <input required type="text" name="name" id="userName" placeholder="اسمك الرباعي">
                     </div>
                     <div class="form-field d-flex align-items-center">
                         <span class="far fa-user"></span>
