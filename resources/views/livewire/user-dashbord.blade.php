@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-md-6 col-12">
+                    <div class=" col-12">
                         اسم صاحب الحساب:{{$user->name}}
                     </div>
-                    <div class="col-md-6 col-12">
+                    <div class=" col-12">
                         البريد الالكتروني:{{$user->email}}
                     </div>
                 </div>
