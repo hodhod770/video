@@ -1,20 +1,18 @@
 <div dir="rtl">
     <div class="container " style="padding: 20px">
         <div class="row">
-            <div class="col-12">
-                <div class="row">
-                    <div class=" col-12">
-                        اسم صاحب الحساب:{{$user->name}}
-                    </div>
-                    <div class=" col-12">
-                        البريد الالكتروني:{{$user->email}}
-                    </div>
+            <div class="col-6">
+                <div class="m-2">
+                    اسم صاحب الحساب: {{$user->name}}
+                </div>
+                <div class="m-2">
+                    البريد الالكتروني: {{$user->email}}
+                </div>
 
-                    <div class=" col-12">
-                      <button class="btn btn-primary">
-                        تعديل البيانات
-                      </button>
-                    </div>
+                <div class="m-2">
+                  <button class="btn btn-primary">
+                    تعديل البيانات
+                  </button>
                 </div>
             </div>
             <div class="col-12" style="margin: 3px">
