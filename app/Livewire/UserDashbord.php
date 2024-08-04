@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Channel;
+use App\Models\UsersOFAll;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 
@@ -17,7 +18,8 @@ class UserDashbord extends Component
     public function render()
     {
         $d=Channel::Where('Userid',session()->get('UAuth')->id)->get();
-        return view('livewire.user-dashbord',['channel'=>$d]);
+        $user=UsersOFAll::find(session()->get('UAuth')->id);
+        return view('livewire.user-dashbord',['channel'=>$d,'user'=>$user]);
     }
 
     public function AddChannel()
