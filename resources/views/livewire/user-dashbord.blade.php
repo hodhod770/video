@@ -1,7 +1,7 @@
 <div dir="rtl">
     <div class="container " style="padding: 20px">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="m-2">
                     اسم صاحب الحساب: {{$user->name}}
                 </div>
@@ -10,8 +10,8 @@
                 </div>
 
                 <div class="m-2">
-                  <button class="btn btn-primary">
-                    تعديل البيانات
+                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editeuserdata">
+                    التعديل على بيانات السمتخدم
                   </button>
                 </div>
             </div>
@@ -111,4 +111,34 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="editeuserdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">تعديل البيانات وكلمة السر</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             <form action="" method="post">
+                <label for="" class="form-lable">ادخل الاسم الجديد</label>
+                <input type="text" class="form-control" name="" id="">
+                <button type="submit" class="btn btn-primary">تعديل الاسم</button>
+             </form>
+
+             <form action="" method="post">
+                <label for="" class="form-lable">ادخل كلمة السر الجديدة</label>
+                <input type="password"  class="form-control" name="" id="">
+                <button type="submit" class="btn btn-primary">تعديل كلمة السر</button>
+
+             </form>
+             
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">اغلاق</button>
+              {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+            </div>
+          </div>
+        </div>
+      </div>
 </div>
