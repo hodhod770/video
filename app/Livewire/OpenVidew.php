@@ -28,22 +28,22 @@ class OpenVidew extends Component
 
     public function render()
     {
+        $v=Videws::where('uname',$this->id)->first();
         $user = session()->get('UAuth');
         // dd(VideoWatchHistory::canRecordWatch($user->id??0, $this->id));
-        if (VideoWatchHistory::canRecordWatch($user->id??0, $this->id)) {
+        if (VideoWatchHistory::canRecordWatch($user->id??0, $v->id)) {
             VideoWatchHistory::create([
                 'user_id' => $user->id,
-                'video_id' => $this->id,
+                'video_id' => $v->id,
                 'watched_at' => Carbon::now(),
             ]);
 
             // احذف النتيجة المخزنة مؤقتًا بعد التسجيل
-            Cache::forget("user_{$user->id}_video_{$this->id}_last_watch");
+            Cache::forget("user_{$user->id}_video_{$v->id}_last_watch");
         }
 
         $feel=WhatUserFeel::where('id_v',$this->id)->where('id_user',session()->get('UAuth')->id??0)->first();
         
-        $v=Videws::where('uname',$this->id)->first();
         $Part=Participants::where('id_c',$v->id_channal)->where('id_user',session()->get('UAuth')->id??0)->first();
         $v->watch_num++;
         $v->save();
