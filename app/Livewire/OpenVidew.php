@@ -27,7 +27,7 @@ class OpenVidew extends Component
 
     public function render()
     {
-        // $user = session()->get('UAuth');
+        $user = session()->get('UAuth');
         // dd(VideoWatchHistory::canRecordWatch($user->id??0, $this->id));
         if (VideoWatchHistory::canRecordWatch($user->id??0, $this->id)) {
             VideoWatchHistory::create([
