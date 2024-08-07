@@ -16,7 +16,6 @@ class VideoWatchHistory extends Model
         
         // تحقق من وجود البيانات في التخزين المؤقت
         $lastWatch = Cache::get($cacheKey);
-        // dd($lastWatch);
         if (!$lastWatch) {
             $lastWatch = self::where('user_id', $userId)
                               ->where('video_id', $videoId)
@@ -32,6 +31,7 @@ class VideoWatchHistory extends Model
         if (!$lastWatch) {
             return true;
         }
+        dd($lastWatch);
 
         $now = Carbon::now();
         return $now->diffInMinutes($lastWatch->watched_at) > 10;
