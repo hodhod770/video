@@ -34,7 +34,7 @@ class VideoWatchHistory extends Model
         }
 
         $now = Carbon::now();
-        return $now->diffInMinutes($lastWatch->watched_at) > 10;
+        return $now->diffInMinutes($lastWatch) > 10;
     }
     use HasFactory;
 }
