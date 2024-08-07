@@ -15,8 +15,9 @@ class VideoWatchHistory extends Model
         $cacheKey = "user_{$userId}_video_{$videoId}_last_watch";
         
         // تحقق من وجود البيانات في التخزين المؤقت
-        $lastWatch = Cache::get($cacheKey);
-        if (!$lastWatch) {
+        $lastWatchTime = Cache::get($cacheKey);
+
+        if (!$lastWatchTime) {
             $lastWatch = self::where('user_id', $userId)
                               ->where('video_id', $videoId)
                               ->orderBy('watched_at', 'desc')
@@ -24,17 +25,17 @@ class VideoWatchHistory extends Model
 
             // احفظ نتيجة البحث في التخزين المؤقت لمدة 10 دقائق
             if ($lastWatch) {
-                Cache::put($cacheKey, $lastWatch->watched_at, now()->addMinutes(10));
+                $lastWatchTime = $lastWatch->watched_at;
+                Cache::put($cacheKey, $lastWatchTime, now()->addMinutes(10));
             }
         }
 
-        if (!$lastWatch) {
+        if (!$lastWatchTime) {
             return true;
         }
-        // dd($lastWatch);
 
         $now = Carbon::now();
-        return $now->diffInMinutes($lastWatch->watched_at) > 10;
+        return $now->diffInMinutes($lastWatchTime) > 10;
     }
     use HasFactory;
 }
