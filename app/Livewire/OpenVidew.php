@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\WhatUserFeel;
 use App\Models\Participants;
 use App\Models\Channel;
+use App\Models\VideoWatchHistory;
 
 class OpenVidew extends Component
 {
