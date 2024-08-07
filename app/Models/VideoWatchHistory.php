@@ -16,7 +16,7 @@ class VideoWatchHistory extends Model
         
         // تحقق من وجود البيانات في التخزين المؤقت
         $lastWatch = Cache::get($cacheKey);
-        dd($lastWatch);
+        // dd($lastWatch);
         if (!$lastWatch) {
             $lastWatch = self::where('user_id', $userId)
                               ->where('video_id', $videoId)
