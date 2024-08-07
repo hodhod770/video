@@ -37,6 +37,8 @@ class OpenVidew extends Component
                 'video_id' => $v->id,
                 'watched_at' => Carbon::now(),
             ]);
+            $v->watch_num++;
+        $v->save();
 
             // احذف النتيجة المخزنة مؤقتًا بعد التسجيل
             Cache::forget("user_{$user->id}_video_{$v->id}_last_watch");
@@ -45,8 +47,7 @@ class OpenVidew extends Component
         $feel=WhatUserFeel::where('id_v',$this->id)->where('id_user',session()->get('UAuth')->id??0)->first();
         
         $Part=Participants::where('id_c',$v->id_channal)->where('id_user',session()->get('UAuth')->id??0)->first();
-        $v->watch_num++;
-        $v->save();
+        
         $likesv=Videws::where('type',$v->type)->orwhere('id_channal',$v->id_channal)->get();
         $comment=Comment::where('id_v',$this->id)->Orderby('id','desc')->get();
         return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel,'Part'=>$Part]);
