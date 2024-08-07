@@ -31,7 +31,7 @@ class VideoWatchHistory extends Model
         if (!$lastWatch) {
             return true;
         }
-        dd($lastWatch);
+        // dd($lastWatch);
 
         $now = Carbon::now();
         return $now->diffInMinutes($lastWatch->watched_at) > 10;
