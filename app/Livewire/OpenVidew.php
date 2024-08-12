@@ -49,11 +49,11 @@ class OpenVidew extends Component
             $sessionKey = "video_{$v->id}_last_watch";
 
             // تحقق من آخر مشاهدة مسجلة في الجلسة
-            $lastWatchTime = $request->session()->get($sessionKey);
+            $lastWatchTime = session()->get($sessionKey);
 
             if (!$lastWatchTime || Carbon::now()->diffInMinutes($lastWatchTime) > 10) {
                 // إذا لم يكن هناك مشاهدة سابقة أو مر أكثر من 10 دقائق، سجل المشاهدة
-                $request->session()->put($sessionKey, Carbon::now());
+               session()->put($sessionKey, Carbon::now());
                 $v->watch_num++;
                 $v->save();
                 // يمكنك تسجيل هذه المعلومات في قاعدة بيانات مخصصة إذا كنت تريد الاحتفاظ بها لاحقًا
