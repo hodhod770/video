@@ -26,10 +26,9 @@ class OpenVidew extends Component
         'texts.min' => 'يجب ألا يقل الحقل عن ثلاثة أحرف.',
     ];
 
-    public function render(Request $request)
+    public function render()
     {
-        $userIp = $request->ip();
-        dd($userIp);
+        
         $v=Videws::where('uname',$this->id)->first();
         $user = session()->get('UAuth');
         // dd(VideoWatchHistory::canRecordWatch($user->id??0, $this->id));
