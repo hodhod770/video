@@ -31,6 +31,7 @@ class OpenVidew extends Component
         
         $v=Videws::where('uname',$this->id)->first();
         $user = session()->get('UAuth');
+        dd(session()->getId());
         // dd(VideoWatchHistory::canRecordWatch($user->id??0, $this->id));
         if (VideoWatchHistory::canRecordWatch($user->id??0, $v->id)) {
             VideoWatchHistory::create([
