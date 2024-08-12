@@ -26,19 +26,21 @@ class OpenVidew extends Component
         'texts.min' => 'يجب ألا يقل الحقل عن ثلاثة أحرف.',
     ];
 
-    public function render()
+    public function render(Request $request)
     {
+        $userIp = $request->ip();
+        dd($userIp);
         $v=Videws::where('uname',$this->id)->first();
         $user = session()->get('UAuth');
         // dd(VideoWatchHistory::canRecordWatch($user->id??0, $this->id));
         if (VideoWatchHistory::canRecordWatch($user->id??0, $v->id)) {
             VideoWatchHistory::create([
-                'user_id' => $user->id,
+                'user_id' => $user->id??0,
                 'video_id' => $v->id,
                 'watched_at' => Carbon::now(),
             ]);
             $v->watch_num++;
-        $v->save();
+             $v->save();
 
             // احذف النتيجة المخزنة مؤقتًا بعد التسجيل
             Cache::forget("user_{$user->id}_video_{$v->id}_last_watch");
