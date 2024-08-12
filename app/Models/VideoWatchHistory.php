@@ -12,7 +12,7 @@ class VideoWatchHistory extends Model
     protected $fillable = ['user_id', 'video_id', 'watched_at'];
     public static function canRecordWatch($userId, $videoId)
     {
-        dd(session()->getId());
+        // dd(session()->getId());
 
         $cacheKey = "user_{$userId}_video_{$videoId}_last_watch";
         
