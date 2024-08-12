@@ -33,20 +33,20 @@ class OpenVidew extends Component
 
         if ($user) {
             // إذا كان المستخدم مسجل الدخول
-            if (VideoWatchHistory::canRecordWatch($user->id, $videoId)) {
+            if (VideoWatchHistory::canRecordWatch($user->id, $v->id)) {
                 VideoWatchHistory::create([
                     'user_id' => $user->id,
-                    'video_id' => $videoId,
+                    'video_id' => $v->id,
                     'watched_at' => Carbon::now(),
                 ]);
                 $v->watch_num++;
                 $v->save();
                 // احذف النتيجة المخزنة مؤقتًا بعد التسجيل
-                Cache::forget("user_{$user->id}_video_{$videoId}_last_watch");
+                Cache::forget("user_{$user->id}_video_{$v->id}_last_watch");
             }
         } else {
             // إذا كان المستخدم غير مسجل الدخول
-            $sessionKey = "video_{$videoId}_last_watch";
+            $sessionKey = "video_{$v->id}_last_watch";
 
             // تحقق من آخر مشاهدة مسجلة في الجلسة
             $lastWatchTime = $request->session()->get($sessionKey);
