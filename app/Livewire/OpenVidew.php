@@ -74,9 +74,9 @@ class OpenVidew extends Component
         $v->save();
         $likesv=Videws::where('type',$v->type)->orwhere('id_channal',$v->id_channal)->get();
         $comment=Comment::where('id_v',$this->id)->Orderby('id','desc')->get();
-        return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel,'Part'=>$Part,'Partcount'=>$Partcount]);
-    }
-
+        return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel,'Part'=>$Part,'Partcount'=>$Partcount]);  
+      }
+    
     public function Sendcommet()
     {
         $validated = $this->validate();
