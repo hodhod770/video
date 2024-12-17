@@ -30,11 +30,12 @@ class OpenVidew extends Component
         
         $v=Videws::where('uname',$this->id)->first();
         $Part=Participants::where('id_c',$v->id_channal)->where('id_user',session()->get('UAuth')->id??0)->first();
+        $Partcount=Participants::where('id_c',$v->id_channal)->where('stute',1)->get();
         $v->watch_num++;
         $v->save();
         $likesv=Videws::where('type',$v->type)->orwhere('id_channal',$v->id_channal)->get();
         $comment=Comment::where('id_v',$this->id)->Orderby('id','desc')->get();
-        return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel,'Part'=>$Part]);
+        return view('livewire.open-videw',['vi'=>$v,'likesv'=>$likesv,'comment'=>$comment,'feel'=>$feel,'Part'=>$Part,'Partcount'=>$Partcount]);
     }
 
     public function Sendcommet()
