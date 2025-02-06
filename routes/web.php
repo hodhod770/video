@@ -17,8 +17,8 @@ Route::get('/', function () {
         $d->save();
     }
     //  3 Channel
-    $channels3=Channel::inRandomOrder()->take(6)->get();
-    $Videws20=Videws::inRandomOrder()->take(20)->get();
+    $channels3=Channel::inRandomOrder()->take(5)->get();
+    $Videws20=Videws::inRandomOrder()->take(22)->get();
     
     return view('welcome',['channels3'=>$channels3,'Videws20'=>$Videws20]);
 })->name('homepage');
