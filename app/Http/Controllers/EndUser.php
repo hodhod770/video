@@ -53,18 +53,17 @@ class EndUser extends Controller
     public function Search(Request $request)
     {
         $query = $request->input('query');
-        $category = $request->input('category');
+        // $category = $request->input('category');
 
         $results = Videws::where(function ($q) use ($query) {
                 $q->where('name', 'LIKE', "%{$query}%")
                   ->orWhere('summary', 'LIKE', "%{$query}%")
                   ->orWhere('description', 'LIKE', "%{$query}%")
                   ->orWhere('kayword', 'LIKE', "%{$query}%");
-            })
-            ->when($category != 0, function ($q) use ($category) {
-                $q->where('type', $category);
-            })
-            ->get();
+            })->get();
+            // ->when($category != 0, function ($q) use ($category) {
+            //     $q->where('type', $category);
+            // })
         return view('Search',['results'=>$results]);
     }
 

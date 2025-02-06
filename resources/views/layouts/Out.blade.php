@@ -29,7 +29,7 @@
 
 		<!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}"/>
-
+		@yield('newstyle')
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -78,14 +78,14 @@
 						<div class="col-md-6">
 							<div class="header-search">
 								<form method="get" action="{{route('search')}}">
-									@csrf
+									{{-- @csrf
 									<select name="category" style="padding: 0" class="input-select">
 										<option value="0">كل الانواع</option>
 										@foreach ($de as $item)
 											<option value="{{$item->id}}">{{$item->name}}</option>
 										@endforeach
-									</select>
-									<input name="query" class="input" placeholder="ابحث هنا">
+									</select> --}}
+									<input style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;" name="query" class="input" placeholder="ابحث هنا">
 									<button type="submit" class="search-btn">البحث</button>
 								</form>
 							</div>
@@ -141,7 +141,7 @@
 		
 
 		<!-- FOOTER -->
-		<footer id="footer">
+		{{-- <footer id="footer">
 			<!-- top footer -->
 			<div class="section">
 				<!-- container -->
@@ -233,7 +233,7 @@
 				<!-- /container -->
 			</div>
 			<!-- /bottom footer -->
-		</footer>
+		</footer> --}}
 		<!-- /FOOTER -->
 
 		<script src="{{asset('js/jquery.min.js')}}"></script>
@@ -242,6 +242,7 @@
 		<script src="{{asset('js/nouislider.min.js')}}"></script>
 		<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 		<script src="{{asset('js/main.js')}}"></script>
+		@yield('newjs')
 		@livewireScripts
 
 	</body>

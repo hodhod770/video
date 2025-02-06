@@ -1,20 +1,38 @@
 @extends('layouts.Out')
 @section('con')
-@php
-Carbon\Carbon::setLocale('ar');
-@endphp
+    @php
+        Carbon\Carbon::setLocale('ar');
+    @endphp
     <!-- SECTION -->
-		<div class="section">
-			<!-- container -->
-			<div class="container">
-				<center>
-					<h1>قنوات شائعة</h1>
-				</center>
-				<!-- row -->
-				<div dir="rtl" class="row">
-					<!-- shop -->
-					@foreach ($channels3 as $item)
-					<div  class="col-md-4 col-xs-6">
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <center>
+                <h1>قنوات شائعة</h1>
+            </center>
+            <!-- row -->
+            <div dir="rtl" class="row">
+                <!-- shop -->
+                @foreach ($channels3 as $item)
+                    <a class="p-2 m-1" href="{{ route('Openc', ['id' => $item->uname]) }}"
+                        style="text-decoration: none;width: 220px">
+                        <div class="card" style="border: none">
+
+                            <img src="{{ asset('storage/photos/' . $item->image) }}"
+                                style="width: 200px; height: 200px; border-radius: 50%;border: 1px solid #000000;"
+                                alt="">
+
+
+
+                            <center>
+                                <h3 class="text-dark">{{ $item->name }}</h3>
+                                <p class="text-dark"><i class="fa fa-user"></i> {{ $item->subscription }} </p>
+                                {{-- <p>{{$item->desc}}</p> --}}
+                            </center>
+
+                        </div>
+                    </a>
+                    {{-- <div  class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="clips">
 
@@ -27,99 +45,158 @@ Carbon\Carbon::setLocale('ar');
 								<a href="{{route('Openc',['id'=>$item->uname])}}" class="cta-btn">زيارة القناة <i class="fa fa-arrow-circle-left"></i></a>
 							</div>
 						</div>
-					</div>
-					@endforeach
-					<!-- /shop -->
+					</div> --}}
+                @endforeach
+                <!-- /shop -->
 
-					<center>
-						<a href="{{route('Listchannel')}}">عرض كل القنوات</a>
-					</center>
+                <center>
+                    <a href="{{ route('Listchannel') }}">عرض كل القنوات</a>
+                </center>
 
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /SECTION -->
-		<hr>
-		<div class="section" >
-			<div class="container">
-				<div class="row p-1">
-					@foreach ($Videws20 as $item)
-					<div class="col-md-4 col-12">
-						<a class="m-1" href="{{route('Openv',['id'=>$item->uname])}}" style="text-decoration: none">
-							<div dir="rtl" class="card m-1">
-								<div class="videocard">
-								<video style="height: 250px;width: 100%;" src="{{asset('storage/videos/'.$item->video)}}" class="card-img-top videorun "></video>
-	
-								</div>
-								<div class="card-body" >
-								  <h5 class="card-title">{{$item->name}}</h5>
-								  <p><i class="fa fa-eye"> {{ $item->watch_num??0 }}</i>  <i class="fa fa fa-thumbs-up"> {{ $item->like_num??0 }}</i></p>
-                
-								  <p>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p>
-								  <p class="card-text">{{$item->summary}}</p>
-								  <div class="row">
-									<div class="col-md-6 col-12" style="display: flex">
-										<i class="fa fa-eye m-1"></i><p class="m-1">{{$item->watch_num}}</p>
-									</div>
-									<div class="col-md-6 col-12" style="display: flex">
-										<i class="fa fa-video-camera m-1"></i><p class="m-1">{{$item->types->name??""}}</p>
-									</div>
-								  </div>
-								</div>
-							  </div>
-						</a>
-					</div>
-					
-					
-					@endforeach
-				</div>
-			</div>
-		</div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+    <hr>
+@section('newstyle')
+    <style>
+        /* تصميم بطاقة الفيديو */
+        .video-card {
+            border: none;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #1f1f1f;
+        }
 
-		
+        .video-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* منطقة الصورة/الفيديو */
+        .video-thumbnail {
+            position: relative;
+            overflow: hidden;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .video-thumbnail video {
+            object-fit: cover;
+            width: 100%;
+            height: 250px;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-thumbnail video:hover {
+            opacity: 0.9;
+        }
+
+        /* عرض مدة الفيديو */
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* معلومات الفيديو */
+        .video-info {
+            padding: 10px 15px;
+        }
+
+        .video-info h5 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .video-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* إحصائيات الفيديو */
+        .video-stats {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #bbb;
+        }
+
+        .video-stats i {
+            margin-right: 4px;
+        }
+
+        /* رابط البطاقة بدون تحته خط */
+        .video-link {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+@endsection
+<div class="section">
+    <div class="container">
+        <div class="row p-1">
+			@foreach ($Videws20 as $item)
+            <div class="col-md-4 col-12 mb-4">
+                <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="video-link">
+                    <div class="card video-card">
+                        <div class="video-thumbnail">
+                            <video wire:ignore 
+                                   id="video_{{ $item->uname }}" 
+                                   src="{{ asset('storage/videos/'.$item->video) }}" 
+                                   muted 
+                                   playsinline
+                                   class="videorun">
+                            </video>
+                            <!-- مدة الفيديو سيتم تحديثها بواسطة Livewire -->
+                            <div class="video-duration">
+                                <span wire:model.defer="durations.{{ $item->uname }}">00:00</span>
+                            </div>
+                        </div>
+                        <div class="card-body video-info" dir="rtl">
+                            <h5>{{ $item->name }}</h5>
+                            <p>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p>
+                            <p class="card-text">{{ \Illuminate\Support\Str::limit($item->summary, 70) }}</p>
+                            <div class="video-stats d-flex justify-content-between">
+                                <div>
+                                    <i class="fa fa-eye"></i> {{ $item->watch_num ?? 0 }}
+                                </div>
+                                <div>
+                                    <i class="fa fa-thumbs-up"></i> {{ $item->like_num ?? 0 }}
+                                </div>
+                                <div>
+                                    <i class="fa fa-video-camera"></i> {{ $item->types->name ?? '' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        @endforeach
+        </div>
+    </div>
+</div>
 
 
-    
 
-        <!-- NEWSLETTER -->
-		<div id="newsletter" class="section">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
-								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-							</form>
-							<ul class="newsletter-follow">
-								<li>
-									<a href="#"><i class="fa fa-facebook"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-instagram"></i></a>
-								</li>
-								<li>
-									<a href="#"><i class="fa fa-pinterest"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</div>
-		<!-- /NEWSLETTER -->
 
-		{{-- <script>
+
+
+<!-- NEWSLETTER -->
+
+<!-- /NEWSLETTER -->
+
+{{-- <script>
 			document.addEventListener('DOMContentLoaded', function () {
 				const video = document.querySelector('.videorun');
 				const card = document.querySelector('.card');
