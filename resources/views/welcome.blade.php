@@ -15,8 +15,11 @@
                 <!-- shop -->
                 @foreach ($channels3 as $item)
                     <div class="col-md-2 col-4">
+                         {{-- <div style="background-size: cover;background-image: url({{ asset('storage/photos/' . $item->image) }}) ;margin-left: 20%;margin-right: 20%;width: 60%;height: 70%; border-radius: 50%;border: 1px solid #000000;">
+
+                        </div> --}}
                         <img src="{{ asset('storage/photos/' . $item->image) }}"
-                            style="width: 100%;height: 50%; border-radius: 50%;border: 1px solid #000000;" alt="">
+                            style=" width: 100%; aspect-ratio: 1/1;object-fit: cover;border-radius: 50%; border: 1px solid #000000;" alt="">
                         <center>
                             <a class="p-2 m-1 " href="{{ route('Openc', ['id' => $item->uname]) }}"
                                 style="text-decoration: none;">
