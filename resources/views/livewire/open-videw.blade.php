@@ -101,7 +101,7 @@
             <div class="lg:w-2/3 p-4">
                 <div wire:ignore>
                     <video class="w-full rounded-lg" style="width: 100%;height: 600px;"   id="player" playsinline controls >
-                        <source src="https://alhodhod-ye.com/storage/videos/669052d0d7639.mp4" type="video/mp4" />
+                        <source src="{{ asset('storage/videos/' . $vi->video) }}" type="video/mp4" />
                         <!-- <source src="/path/to/video.webm" type="video/webm" /> -->
                       
                         <!-- Captions are optional -->
@@ -265,39 +265,39 @@
                 <h2 class="text-lg lg:text-xl font-bold">الفيديوهات المشابهة </h2>
                 <div class="mt-4">
                     @foreach ($likesv as $item)
-                    @php
-                        $Partcountwatch = $item->watch_num ?? 0;
-                        $formattedCountwatch = $Partcountwatch >= 1000000
-                            ? number_format($Partcountwatch / 1000000, 1) . 'M'
-                            : ($Partcountwatch >= 1000
-                                ? number_format($Partcountwatch / 1000, 1) . 'K'
-                                : $Partcountwatch);
-                    @endphp
-                
-                    <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="block">
-                        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800  rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 mb-6">
-                            <!-- فيديو المصغرة -->
-                            <div class="w-full lg:w-1/2">
-                                <video 
-                                    src="{{ asset('storage/videos/' . $item->video) }}" 
-                                    class="w-full h-40 object-cover" 
-                                    muted 
-                                    playsinline>
-                                </video>
-                            </div>
-                            <!-- معلومات الفيديو -->
-                            <div class="p-4 w-full lg:w-1/2">
-                                <p class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    {{ $item->name ?? '' }}
-                                </p>
-                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                                    {{ $formattedCountwatch }} مشاهدات • {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
-                                </p>
-                                <!-- يمكنك إضافة تفاصيل أخرى أو أيقونات هنا إذا رغبت -->
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
+    @php
+        $Partcountwatch = $item->watch_num ?? 0;
+        $formattedCountwatch = $Partcountwatch >= 1000000
+            ? number_format($Partcountwatch / 1000000, 1) . 'M'
+            : ($Partcountwatch >= 1000
+                ? number_format($Partcountwatch / 1000, 1) . 'K'
+                : $Partcountwatch);
+    @endphp
+
+    <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="block">
+        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800 transform hover:scale-105 transition duration-300 mb-4">
+            <!-- مساحة الصورة المصغرة الموسعة (66% من العرض على الشاشات الكبيرة) -->
+            <div class="w-full lg:w-2/3">
+                <video 
+                    src="{{ asset('storage/videos/' . $item->video) }}" 
+                    class="w-full h-60 object-cover" 
+                    muted 
+                    playsinline>
+                </video>
+            </div>
+            <!-- معلومات الفيديو (33% من العرض على الشاشات الكبيرة) -->
+            <div class="p-4 w-full lg:w-1/3">
+                <p class="text-lg font-semibold text-gray-900 dark:text-white">
+                    {{ $item->name ?? '' }}
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                    {{ $formattedCountwatch }} مشاهدات • {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
+                </p>
+            </div>
+        </div>
+    </a>
+@endforeach
+
                 
 
                 </div>
