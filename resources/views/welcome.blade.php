@@ -14,7 +14,7 @@
             <div dir="rtl" class="row">
                 <!-- shop -->
                 @foreach ($channels3 as $item)
-                    <div class="col-md-2 col-4">
+                    <div class="col-md-2 col-4" style="height: 300px;">
                          {{-- <div style="background-size: cover;background-image: url({{ asset('storage/photos/' . $item->image) }}) ;margin-left: 20%;margin-right: 20%;width: 60%;height: 70%; border-radius: 50%;border: 1px solid #000000;">
 
                         </div> --}}
