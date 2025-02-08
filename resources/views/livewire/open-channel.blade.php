@@ -51,10 +51,10 @@
 
             .video-player {
                 width: 100%;
-               
-            aspect-ratio: 1/1;
-            /* يحافظ على الصورة مربعة */
-            object-fit: cover;
+
+                aspect-ratio: 1/1;
+                /* يحافظ على الصورة مربعة */
+                object-fit: cover;
                 border-radius: 15px;
             }
 

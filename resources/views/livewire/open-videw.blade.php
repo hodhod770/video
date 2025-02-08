@@ -99,10 +99,25 @@
     <div class="flex flex-col bg-background text-foreground min-h-screen" dir="rtl">
         <div class="flex flex-col lg:flex-row">
             <div class="lg:w-2/3 p-4">
-                <video class="w-full rounded-lg" style="width: 100%;height: 600px;" controls>
-                    <source src="{{ asset('storage/videos/' . $vi->video) }}" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+                <div wire:ignore>
+                    <video class="w-full rounded-lg" style="width: 100%;height: 600px;"   id="player" playsinline controls >
+                        <source src="https://alhodhod-ye.com/storage/videos/669052d0d7639.mp4" type="video/mp4" />
+                        <!-- <source src="/path/to/video.webm" type="video/webm" /> -->
+                      
+                        <!-- Captions are optional -->
+                        <track kind="captions" label="Yemen captions" src="/path/to/captions.vtt" srclang="en" default />
+                    </video>
+                
+                    <!-- تضمين ملفات CSS و JavaScript -->
+                    <link rel="stylesheet" href="{{ asset('video.css') }}" />
+                    <script src="{{ asset('video.js') }}"></script>
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function() {
+                          const player = new Plyr('#player');
+                      });
+                    </script>
+                </div>
+                
                 <div class="mt-4">
                     <h1 class="text-xl lg:text-2xl font-bold">{{ $vi->name }}</h1>
                     <div class="flex items-center mt-2">
@@ -250,29 +265,40 @@
                 <h2 class="text-lg lg:text-xl font-bold">الفيديوهات المشابهة </h2>
                 <div class="mt-4">
                     @foreach ($likesv as $item)
-                        {{-- <a href="{{ route('Openv', ['id' => $item->uname]) }}" style="text-decoration: none"> --}}
-
-                        @php
-                            $Partcountwatch = $item->watch_num ?? 0;
-                            $formattedCountwatch =
-                                $Partcountwatch >= 1000000
-                                    ? number_format($Partcountwatch / 1000000, 1) . 'M'
-                                    : ($Partcountwatch >= 1000
-                                        ? number_format($Partcountwatch / 1000, 1) . 'K'
-                                        : $Partcountwatch);
-                        @endphp
-                        <a href="{{ route('Openv', ['id' => $item->uname]) }}" style="text-decoration: none">
-
-                        <div class="flex flex-col lg:flex-row items-center mb-4">
-                            <video style="width: 50%;height: 150px;object-fit: cover"
-                                        src="{{ asset('storage/videos/' . $item->video) }}"></video>
-                            <div>
-                                <p class="font-semibold">{{ $item->name ?? '' }}</p>
-                                <p class="text-muted">{{ $formattedCountwatch }} مشاهدات •
-                                    {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p>
+                    @php
+                        $Partcountwatch = $item->watch_num ?? 0;
+                        $formattedCountwatch = $Partcountwatch >= 1000000
+                            ? number_format($Partcountwatch / 1000000, 1) . 'M'
+                            : ($Partcountwatch >= 1000
+                                ? number_format($Partcountwatch / 1000, 1) . 'K'
+                                : $Partcountwatch);
+                    @endphp
+                
+                    <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="block">
+                        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 mb-6">
+                            <!-- فيديو المصغرة -->
+                            <div class="w-full lg:w-1/2">
+                                <video 
+                                    src="{{ asset('storage/videos/' . $item->video) }}" 
+                                    class="w-full h-40 object-cover" 
+                                    muted 
+                                    playsinline>
+                                </video>
+                            </div>
+                            <!-- معلومات الفيديو -->
+                            <div class="p-4 w-full lg:w-1/2">
+                                <p class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    {{ $item->name ?? '' }}
+                                </p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                                    {{ $formattedCountwatch }} مشاهدات • {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
+                                </p>
+                                <!-- يمكنك إضافة تفاصيل أخرى أو أيقونات هنا إذا رغبت -->
                             </div>
                         </div>
-                    @endforeach
+                    </a>
+                @endforeach
+                
 
                 </div>
             </div>
@@ -299,175 +325,3 @@
 
 
 
-{{--    <div class="section" dir="rtl">
-
-        <div class="row p-1">
-            <div class="col-md-8 col-12">
-                <div style="width: 100%; height: 600px;" wire:ignore.self>
-
-                    <video controls autoplay style="width: 100%;height: 100%"
-                        src="{{ asset('storage/videos/' . $vi->video) }}"></video>
-                </div>
-                <h1>{{ $vi->name }}</h1>
-                <p><i class="fa fa-eye"> {{ $vi->watch_num ?? 0 }}</i> <i class="fa fa fa-thumbs-up">
-                        {{ $vi->like_num ?? 0 }}</i> <i
-                        class="fa fa-date">{{ Carbon\Carbon::parse($vi->created_at)->diffForHumans() }}</i></p>
-
-                <div class="row">
-
-                    <div class="col-md-4 col-6">
-                        @if ($feel)
-                            @if ($feel->feel == 0)
-                                <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'>
-                                    اعجاب</button>
-                                <button class=" m-1 btn btn-primary fa fa-thumbs-down" wire:click='editefeel(2)'>
-                                    سيئ</button>
-                            @elseif($feel->feel == 1)
-                                <button class=" m-1 btn btn-success fa fa-thumbs-up" wire:click='editefeel(0)'> تم تسجيل
-                                    اعجابك </button>
-                                <button class=" m-1 btn btn-primary fa fa-thumbs-down" wire:click='editefeel(2)'>
-                                    سيئ</button>
-                            @elseif($feel->feel == 2)
-                                <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'>
-                                    اعجاب</button>
-                                <button class=" m-1 btn btn-danger fa fa-thumbs-down" wire:click='editefeel(0)'> تم
-                                    تسجيل استيائك </button>
-                            @endif
-                        @else
-                            <button class=" m-1 btn btn-primary fa fa-thumbs-up" wire:click='editefeel(1)'>
-                                اعجاب</button>
-                            <button class=" m-1 btn btn-primary fa fa-thumbs-down" wire:click='editefeel(2)'>
-                                سيئ</button>
-                        @endif
-                    </div>
-                    <div class="col-md-4 col-0">
-                        <center>
-
-                        </center>
-                    </div>
-                    <div class="col-md-4 col-6">
-
-
-                        <div
-                            style="display: flex;flex-wrap: wrap;align-content: center;justify-content: center;align-items: center;margin: 41pz;flex-direction: row;">
-                            <img style="border-radius: 50%;width: 50px; height: 50px;"
-                                src="{{ asset('storage/photos/' . $vi->channle->image) }}" alt="">
-
-
-                            <p style="margin: 17px">{{ $vi->channle->name }}</p>
-
-
-                        </div>
-                        @if ($Part)
-                            @if ($Part->stute == 1)
-                                <center>
-                                    <button wire:click='Participants' class=" m-1 btn btn-info fa fa-bell"> الغاء
-                                        الاشتراك ب القناة</button>
-                                </center>
-                            @else
-                                <center>
-                                    <button wire:click='Participants' class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب
-                                        القناة</button>
-                                </center>
-                            @endif
-                        @else
-                            <center>
-                                <button wire:click='Participants' class=" m-1 btn btn-danger fa fa-bell"> الاشتراك ب
-                                    القناة</button>
-                            </center>
-                        @endif
-
-
-                    </div>
-
-                </div>
-
-
-
-
-
-                <p>{{ $vi->summary }}</p>
-                <p>{{ $vi->description }}</p>
-
-                <div style="height: 50px"></div>
-                <hr>
-                <div class="row">
-                    <div class="col-12 p-2 m-2">
-                        <form wire:submit='Sendcommet' method="post">
-                            <div class="input-group">
-                                <input wire:model='texts' placeholder="اكتب تعليقك هنا ...." type="text"
-                                    class="form-control" name="" id="">
-                                <div class="input-group-append" style="height: 100%">
-                                    <button type="submit" class="btn btn-primary fa fa-send"> ارسال</button>
-                                </div>
-                            </div>
-                            @error('texts')
-                                <span class="error text-danger">{{ $message }}</span>
-                            @enderror
-                        </form>
-
-                    </div>
-
-
-                </div>
-
-
-
-
-
-                <div style="height: 50px"></div>
-                <hr>
-                <div class="row">
-                    @foreach ($comment as $item)
-                        <div class="col-md-6 col-12">
-                            <div class="row">
-                                <div class="col-4"
-                                    style="display: flex;
-                                            flex-direction: column;
-                                            
-                                            align-items: center;
-                                            justify-content: flex-start;
-                                            flex-wrap: nowrap;">
-                                    <img style="width: 50px; height: 50px;" src="{{ asset('person.png') }}"
-                                        alt="">
-                                    <br>
-                                    <h6 style="transform: translateY(-27px);">{{ $item->user->name ?? '' }}</h6>
-                                </div>
-
-                                <div class="col-8" style="text-align: center">
-                                    {{ $item->texts }}
-                                </div>
-                            </div>
-                            <hr>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <div class="col-md-4 col-12">
-                @foreach ($likesv as $item)
-                    <a href="{{ route('Openv', ['id' => $item->uname]) }}" style="text-decoration: none">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <video style="width: 100%;height: 150px;object-fit: cover"
-                                        src="{{ asset('storage/videos/' . $item->video) }}"></video>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $item->name ?? '' }}</h5>
-                                        <p class="card-text">{{ $item->summary ?? '' }}</p>
-                                        <p class="card-text"><small
-                                                class="text-muted">{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-
-        </div>
-
-    </div> --}}

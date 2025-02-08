@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="video.css" />
+</head>
+<body>
+    <div style="width: 200px;">
+        <video style="width: 200px; height: 400px;" id="player" playsinline controls data-poster="/path/to/poster.jpg">
+            <source src="https://alhodhod-ye.com/storage/videos/669052d0d7639.mp4" type="video/mp4" />
+            <!-- <source src="/path/to/video.webm" type="video/webm" /> -->
+          
+            <!-- Captions are optional -->
+            <track kind="captions" label="Yemen captions" src="/path/to/captions.vtt" srclang="en" default />
+          </video>
+    </div>
+      <script src="video.js"></script>
+      <script>
+        const player = new Plyr('#player');
+      </script>
+      
+</body>
+</html>
