@@ -13,8 +13,10 @@
             <div dir="rtl" class="row d-flex flex-wrap justify-content-center">
                 @foreach ($channels3 as $item)
                     <div class="col-md-2 col-4 d-flex flex-column align-items-center" style="height: 350px;">
-                        <img src="{{ asset('storage/photos/' . $item->image) }}" class="profile-img" alt="">
+                        <a href="{{ route('Openc', ['id' => $item->uname]) }}">
+                            <img src="{{ asset('storage/photos/' . $item->image) }}" class="profile-img" alt="">
 
+                        </a>
                         <a class="p-2 m-1 text-center flex-grow-1 d-flex flex-column justify-content-between"
                             href="{{ route('Openc', ['id' => $item->uname]) }}" style="text-decoration: none; width: 100%;">
                             <div class="card profile-card">

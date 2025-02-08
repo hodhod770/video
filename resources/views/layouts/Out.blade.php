@@ -65,57 +65,66 @@
 					<!-- row -->
 					<div class="row">
 						<!-- LOGO -->
-						<div class="col-md-3">
-							<div class="header-logo">
-								<a href="{{route('homepage')}}" class="logo">
-									<img style="height: 100px;" src="/logo2.png" alt="">
-								</a>
-							</div>
+						<div class="col-md-3 col-12">
+							<center>
+								
+								<div class="header-logo">
+									<a href="{{route('homepage')}}" class="logo">
+										<img style="height: 100px;" src="/logo2.png" alt="">
+									</a>
+								</div>
+							</center>
 						</div>
 						<!-- /LOGO -->
 
 						<!-- SEARCH BAR -->
-						<div class="col-md-6">
-							<div class="header-search">
-								<form method="get" action="{{route('search')}}">
-									{{-- @csrf
-									<select name="category" style="padding: 0" class="input-select">
-										<option value="0">كل الانواع</option>
-										@foreach ($de as $item)
-											<option value="{{$item->id}}">{{$item->name}}</option>
-										@endforeach
-									</select> --}}
-									<input style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;" name="query" class="input" placeholder="ابحث هنا">
-									<button type="submit" class="search-btn">البحث</button>
-								</form>
-							</div>
+						<div class="col-md-6 col-12">
+							<center>
+								
+								<div class="header-search">
+									<form method="get" action="{{route('search')}}">
+										{{-- @csrf
+										<select name="category" style="padding: 0" class="input-select">
+											<option value="0">كل الانواع</option>
+											@foreach ($de as $item)
+												<option value="{{$item->id}}">{{$item->name}}</option>
+											@endforeach
+										</select> --}}
+										<input style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;" name="query" class="input" placeholder="ابحث هنا">
+										<button type="submit" class="search-btn">البحث</button>
+									</form>
+								</div>
+							</center>
 						</div>
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
-						<div class="col-md-3 clearfix">
-							<div class="header-ctn">
-								<!-- Wishlist -->
-								{{-- <div>
-									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>مفضلاتك</span>
-										<div class="qty">2</div>
-									</a>
-								</div> --}}
-								<!-- /Wishlist -->
-
-								<div>
-									<a href="{{route('userlogin')}}">
-										<i class="fa fa-user"></i>
-										<span>حسابك</span>
-										<div class="qty">0</div>
-									</a>
-								</div>
-								<!-- /Cart -->
-
+						<div class="col-md-3 col-12 clearfix">
+							<center>
 								
-							</div>
+								<div class="header-ctn">
+									<!-- Wishlist -->
+									{{-- <div>
+										<a href="#">
+											<i class="fa fa-heart-o"></i>
+											<span>مفضلاتك</span>
+											<div class="qty">2</div>
+										</a>
+									</div> --}}
+									<!-- /Wishlist -->
+	
+									<div>
+										<a href="{{route('userlogin')}}">
+											<i class="fa fa-user"></i>
+											<span>حسابك</span>
+											<div class="qty">0</div>
+										</a>
+									</div>
+									<!-- /Cart -->
+	
+									
+								</div>
+							</center>
 						</div>
 						<!-- /ACCOUNT -->
 					</div>
