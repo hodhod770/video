@@ -99,21 +99,13 @@
 						<!-- /SEARCH BAR -->
 
 						<!-- ACCOUNT -->
-						<div class="col-md-3 col-12 clearfix">
+						<div class="col-md-3 col-12 ">
 							<center>
 								
 								<div class="header-ctn">
-									<!-- Wishlist -->
-									{{-- <div>
-										<a href="#">
-											<i class="fa fa-heart-o"></i>
-											<span>مفضلاتك</span>
-											<div class="qty">2</div>
-										</a>
-									</div> --}}
-									<!-- /Wishlist -->
+									
 	
-									<div>
+									<div class="">
 										<a href="{{route('userlogin')}}">
 											<i class="fa fa-user"></i>
 											<span>حسابك</span>
