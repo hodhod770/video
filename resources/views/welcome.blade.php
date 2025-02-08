@@ -19,9 +19,10 @@
                             <a class="p-2 m-1 " href="{{ route('Openc', ['id' => $item->uname]) }}"
                                 style="text-decoration: none;">
                                 <div class="card" style="border: none">
+                                    <div style="width: 100%;height: 100%;"></div>
 
-                                    <img src="{{ asset('storage/photos/' . $item->image) }}"
-                                        style="height: 200px; border-radius: 50%;border: 1px solid #000000;" alt="">
+                                    {{-- <img src="{{ asset('storage/photos/' . $item->image) }}"
+                                        style="height: 200px; border-radius: 50%;border: 1px solid #000000;" alt=""> --}}
 
 
 
