@@ -21,7 +21,7 @@
                                 <div class="card" style="border: none">
 
                                     <img src="{{ asset('storage/photos/' . $item->image) }}"
-                                        style=" border-radius: 50%;border: 1px solid #000000;" alt="">
+                                        style="width: 100%; height: 100%; border-radius: 50%;border: 1px solid #000000;" alt="">
 
 
 
