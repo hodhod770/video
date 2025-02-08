@@ -5,66 +5,33 @@
     @endphp
     <!-- SECTION -->
     <div class="section">
-        <!-- container -->
         <div class="container">
             <center>
                 <h1>قنوات شائعة</h1>
             </center>
-            <!-- row -->
-            <div dir="rtl" class="row">
-                <!-- shop -->
+
+            <div dir="rtl" class="row d-flex flex-wrap justify-content-center">
                 @foreach ($channels3 as $item)
-                    <div class="col-md-2 col-4" style="height: 300px;">
-                         {{-- <div style="background-size: cover;background-image: url({{ asset('storage/photos/' . $item->image) }}) ;margin-left: 20%;margin-right: 20%;width: 60%;height: 70%; border-radius: 50%;border: 1px solid #000000;">
+                    <div class="col-md-2 col-4 d-flex flex-column align-items-center" style="height: 350px;">
+                        <img src="{{ asset('storage/photos/' . $item->image) }}" class="profile-img" alt="">
 
-                        </div> --}}
-                        <img src="{{ asset('storage/photos/' . $item->image) }}"
-                            style=" width: 100%; aspect-ratio: 1/1;object-fit: cover;border-radius: 50%; border: 1px solid #000000;" alt="">
-                        <center>
-                            <a class="p-2 m-1 " href="{{ route('Openc', ['id' => $item->uname]) }}"
-                                style="text-decoration: none;">
-                                <div class="card" style="border: none">
-
-
-
-
-                                    <center>
-                                        <h3 class="text-dark">{{ $item->name }}</h3>
-                                        <p class="text-dark"><i class="fa fa-user"></i> {{ $item->subscription }} </p>
-                                        {{-- <p>{{$item->desc}}</p> --}}
-                                    </center>
-
-                                </div>
-                            </a>
-                        </center>
-
+                        <a class="p-2 m-1 text-center flex-grow-1 d-flex flex-column justify-content-between"
+                            href="{{ route('Openc', ['id' => $item->uname]) }}" style="text-decoration: none; width: 100%;">
+                            <div class="card profile-card">
+                                <h3 class="text-dark">{{ $item->name }}</h3>
+                                <p class="text-dark"><i class="fa fa-user"></i> {{ $item->subscription }} </p>
+                            </div>
+                        </a>
                     </div>
-                    {{-- <div  class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="clips">
-
-							</div>
-							<div class="shop-img">
-								<img  style="height: 350px" src="{{asset('storage/photos/'.$item->image)}}" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>{{$item->name}}</h3>
-								<a href="{{route('Openc',['id'=>$item->uname])}}" class="cta-btn">زيارة القناة <i class="fa fa-arrow-circle-left"></i></a>
-							</div>
-						</div>
-					</div> --}}
                 @endforeach
-                <!-- /shop -->
-
-                <center>
-                    <a href="{{ route('Listchannel') }}">عرض كل القنوات</a>
-                </center>
-
             </div>
-            <!-- /row -->
+
+            <center>
+                <a href="{{ route('Listchannel') }}">عرض كل القنوات</a>
+            </center>
         </div>
-        <!-- /container -->
     </div>
+
     <!-- /SECTION -->
     <hr>
 @section('newstyle')
@@ -148,6 +115,39 @@
             text-decoration: none;
             color: inherit;
         }
+
+        .profile-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            /* يحافظ على الصورة مربعة */
+            object-fit: cover;
+            /* يمنع التشوه */
+            border-radius: 50%;
+            /* يجعل الصورة دائرية */
+            border: 1px solid #000;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex-grow: 1;
+            border: none;
+            /* يضمن تساوي جميع البطاقات */
+        }
+
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+            /* تقليل المسافة بين الصورة والنص */
+            min-height: 100px;
+            /* يجعل كل البطاقات بنفس الطول */
+        }
     </style>
 @endsection
 <div class="section">
@@ -158,13 +158,16 @@
                     <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="video-link">
                         <div class="card video-card">
                             <div class="video-thumbnail">
-                                <video wire:ignore id="video_{{ $item->uname }}"
-                                    src="{{ asset('storage/videos/' . $item->video) }}" muted playsinline
+                                <video id="video_{{ $item->uname }}" 
+                                    src="{{ asset('storage/videos/' . $item->video) }}" 
+                                    muted playsinline preload="metadata" 
                                     class="videorun">
                                 </video>
-                                <!-- مدة الفيديو سيتم تحديثها بواسطة Livewire -->
+                                
+
+                                <!-- سيتم تحديث مدة الفيديو عبر JavaScript -->
                                 <div class="video-duration">
-                                    <span wire:model.defer="durations.{{ $item->uname }}">00:00</span>
+                                    <span id="duration_video_{{ $item->uname }}">00:00</span>
                                 </div>
                             </div>
                             <div class="card-body video-info" dir="rtl">
@@ -187,6 +190,30 @@
                     </a>
                 </div>
             @endforeach
+            @section('newjs')
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    let videos = document.querySelectorAll("video");
+                
+                    videos.forEach(video => {
+                        video.addEventListener("loadedmetadata", function () {
+                            let durationElement = document.getElementById(`duration_${video.id}`);
+                            if (durationElement) {
+                                durationElement.textContent = formatTime(video.duration);
+                            }
+                        });
+                    });
+                
+                    function formatTime(seconds) {
+                        let min = Math.floor(seconds / 60);
+                        let sec = Math.floor(seconds % 60);
+                        return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                    }
+                });
+                </script>
+                
+            @endsection
+
         </div>
     </div>
 </div>
