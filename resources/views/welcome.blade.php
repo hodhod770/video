@@ -14,24 +14,28 @@
             <div dir="rtl" class="row">
                 <!-- shop -->
                 @foreach ($channels3 as $item)
-                    <a class="p-2 m-1" href="{{ route('Openc', ['id' => $item->uname]) }}"
-                        style="text-decoration: none;width: 220px">
-                        <div class="card" style="border: none">
+                    <div class="col-md-2 col-4">
+                        <center>
+                            <a class="p-2 m-1 " href="{{ route('Openc', ['id' => $item->uname]) }}"
+                                style="text-decoration: none;">
+                                <div class="card" style="border: none">
 
-                            <img src="{{ asset('storage/photos/' . $item->image) }}"
-                                style="width: 200px; height: 200px; border-radius: 50%;border: 1px solid #000000;"
-                                alt="">
+                                    <img src="{{ asset('storage/photos/' . $item->image) }}"
+                                        style=" border-radius: 50%;border: 1px solid #000000;" alt="">
 
 
 
-                            <center>
-                                <h3 class="text-dark">{{ $item->name }}</h3>
-                                <p class="text-dark"><i class="fa fa-user"></i> {{ $item->subscription }} </p>
-                                {{-- <p>{{$item->desc}}</p> --}}
-                            </center>
+                                    <center>
+                                        <h3 class="text-dark">{{ $item->name }}</h3>
+                                        <p class="text-dark"><i class="fa fa-user"></i> {{ $item->subscription }} </p>
+                                        {{-- <p>{{$item->desc}}</p> --}}
+                                    </center>
 
-                        </div>
-                    </a>
+                                </div>
+                            </a>
+                        </center>
+
+                    </div>
                     {{-- <div  class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="clips">
@@ -146,43 +150,40 @@
 <div class="section">
     <div class="container">
         <div class="row p-1">
-			@foreach ($Videws20 as $item)
-            <div class="col-md-4 col-12 mb-4">
-                <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="video-link">
-                    <div class="card video-card">
-                        <div class="video-thumbnail">
-                            <video wire:ignore 
-                                   id="video_{{ $item->uname }}" 
-                                   src="{{ asset('storage/videos/'.$item->video) }}" 
-                                   muted 
-                                   playsinline
-                                   class="videorun">
-                            </video>
-                            <!-- مدة الفيديو سيتم تحديثها بواسطة Livewire -->
-                            <div class="video-duration">
-                                <span wire:model.defer="durations.{{ $item->uname }}">00:00</span>
-                            </div>
-                        </div>
-                        <div class="card-body video-info" dir="rtl">
-                            <h5>{{ $item->name }}</h5>
-                            <p>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p>
-                            <p class="card-text">{{ \Illuminate\Support\Str::limit($item->summary, 70) }}</p>
-                            <div class="video-stats d-flex justify-content-between">
-                                <div>
-                                    <i class="fa fa-eye"></i> {{ $item->watch_num ?? 0 }}
-                                </div>
-                                <div>
-                                    <i class="fa fa-thumbs-up"></i> {{ $item->like_num ?? 0 }}
-                                </div>
-                                <div>
-                                    <i class="fa fa-video-camera"></i> {{ $item->types->name ?? '' }}
+            @foreach ($Videws20 as $item)
+                <div class="col-md-4 col-12 mb-4">
+                    <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="video-link">
+                        <div class="card video-card">
+                            <div class="video-thumbnail">
+                                <video wire:ignore id="video_{{ $item->uname }}"
+                                    src="{{ asset('storage/videos/' . $item->video) }}" muted playsinline
+                                    class="videorun">
+                                </video>
+                                <!-- مدة الفيديو سيتم تحديثها بواسطة Livewire -->
+                                <div class="video-duration">
+                                    <span wire:model.defer="durations.{{ $item->uname }}">00:00</span>
                                 </div>
                             </div>
+                            <div class="card-body video-info" dir="rtl">
+                                <h5>{{ $item->name }}</h5>
+                                <p>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</p>
+                                <p class="card-text">{{ \Illuminate\Support\Str::limit($item->summary, 70) }}</p>
+                                <div class="video-stats d-flex justify-content-between">
+                                    <div>
+                                        <i class="fa fa-eye"></i> {{ $item->watch_num ?? 0 }}
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-thumbs-up"></i> {{ $item->like_num ?? 0 }}
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-video-camera"></i> {{ $item->types->name ?? '' }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-        @endforeach
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
