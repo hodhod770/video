@@ -275,7 +275,7 @@
                     @endphp
                 
                     <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="block">
-                        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 mb-6">
+                        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800  rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 mb-6">
                             <!-- فيديو المصغرة -->
                             <div class="w-full lg:w-1/2">
                                 <video 
