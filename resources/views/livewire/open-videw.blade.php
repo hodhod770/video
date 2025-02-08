@@ -92,6 +92,16 @@
                 --ring: 240 4.9% 83.9%;
             }
         }
+        .video-duration {
+            position: absolute;
+            top: 122px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
     </style>
     @php
         Carbon\Carbon::setLocale('ar');
@@ -99,30 +109,15 @@
     <div class="flex flex-col bg-background text-foreground min-h-screen" dir="rtl">
         <div class="flex flex-col lg:flex-row">
             <div class="lg:w-2/3 p-4">
-                <div wire:ignore>
-                    <video class="w-full rounded-lg" style="width: 100%;height: 600px;"   id="player" playsinline controls >
-                        <source src="{{ asset('storage/videos/' . $vi->video) }}" type="video/mp4" />
-                        <!-- <source src="/path/to/video.webm" type="video/webm" /> -->
-                      
-                        <!-- Captions are optional -->
-                        <track kind="captions" label="Yemen captions" src="/path/to/captions.vtt" srclang="en" default />
-                    </video>
-                
-                    <!-- تضمين ملفات CSS و JavaScript -->
-                    <link rel="stylesheet" href="{{ asset('video.css') }}" />
-                    <script src="{{ asset('video.js') }}"></script>
-                    <script>
-                      document.addEventListener('DOMContentLoaded', function() {
-                          const player = new Plyr('#player');
-                      });
-                    </script>
-                </div>
-                
+                <video class="w-full rounded-lg" style="width: 100%;height: 600px;" controls>
+                    <source src="{{ asset('storage/videos/' . $vi->video) }}" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
                 <div class="mt-4">
                     <h1 class="text-xl lg:text-2xl font-bold">{{ $vi->name }}</h1>
                     <div class="flex items-center mt-2">
-                        <img src="{{ asset('storage/photos/' . $vi->channle->image) }}"
-                            style="width: 40px; height: 40px;" alt="Channel Logo" class="rounded-full mr-2" />
+                        <img  src="{{ asset('storage/photos/' . $vi->channle->image) }}"
+                            style="width: 40px; height: 40px;margin: 7px" alt="Channel Logo" class="rounded-full mr-2" />
                         <div>
                             <p class="font-semibold"> {{ $vi->channle->name }} </p>
                             <p class="text-muted">
@@ -261,67 +256,73 @@
                     </div>
                 </div>
             </div>
-            <div class="lg:w-1/3 p-4 overflow-y-auto">
+            <div class="lg:w-1/3  overflow-y-auto">
                 <h2 class="text-lg lg:text-xl font-bold">الفيديوهات المشابهة </h2>
-                <div class="mt-4">
+                <div wire:ignore class="mt-4">
                     @foreach ($likesv as $item)
-    @php
-        $Partcountwatch = $item->watch_num ?? 0;
-        $formattedCountwatch = $Partcountwatch >= 1000000
-            ? number_format($Partcountwatch / 1000000, 1) . 'M'
-            : ($Partcountwatch >= 1000
-                ? number_format($Partcountwatch / 1000, 1) . 'K'
-                : $Partcountwatch);
-    @endphp
-
-    <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="block">
-        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800 transform hover:scale-105 transition duration-300 mb-4">
-            <!-- مساحة الصورة المصغرة الموسعة (66% من العرض على الشاشات الكبيرة) -->
-            <div class="w-full lg:w-2/3">
-                <video 
-                    src="{{ asset('storage/videos/' . $item->video) }}" 
-                    class="w-full h-60 object-cover" 
-                    muted 
-                    playsinline>
-                </video>
-            </div>
-            <!-- معلومات الفيديو (33% من العرض على الشاشات الكبيرة) -->
-            <div class="p-4 w-full lg:w-1/3">
-                <p class="text-lg font-semibold text-gray-900 dark:text-white">
-                    {{ $item->name ?? '' }}
-                </p>
-                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                    {{ $formattedCountwatch }} مشاهدات • {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
-                </p>
-            </div>
-        </div>
-    </a>
-@endforeach
+                    @php
+                        $Partcountwatch = $item->watch_num ?? 0;
+                        $formattedCountwatch = $Partcountwatch >= 1000000
+                            ? number_format($Partcountwatch / 1000000, 1) . 'M'
+                            : ($Partcountwatch >= 1000
+                                ? number_format($Partcountwatch / 1000, 1) . 'K'
+                                : $Partcountwatch);
+                    @endphp
+                
+                    <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="block">
+                        <div class="flex flex-col lg:flex-row items-center bg-white dark:bg-gray-800 transform hover:scale-105 transition duration-300 mb-4">
+                            <!-- مساحة الصورة المصغرة الموسعة (66% من العرض على الشاشات الكبيرة) -->
+                            <div class="w-full lg:w-2/3">
+                                <video 
+                                    src="{{ asset('storage/videos/' . $item->video) }}" 
+                                    class="w-full h-40 object-cover" 
+                                    muted 
+                                    id="video_{{ $item->uname }}" 
+                                    playsinline>
+                                </video>
+                                <div class="video-duration">
+                                    <span id="duration_video_{{ $item->uname }}">00:00</span>
+                                </div>
+                                
+                            </div>
+                           
+                            <!-- معلومات الفيديو (33% من العرض على الشاشات الكبيرة) -->
+                            <div class="p-2 w-full lg:w-1/3">
+                                <p class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    {{ $item->name ?? '' }}
+                                </p>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                                    {{ $formattedCountwatch }} مشاهدات • {{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
 
                 
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        let videos = document.querySelectorAll("video");
+                    
+                        videos.forEach(video => {
+                            video.addEventListener("loadedmetadata", function () {
+                                let durationElement = document.getElementById(`duration_${video.id}`);
+                                if (durationElement) {
+                                    durationElement.textContent = formatTime(video.duration);
+                                }
+                            });
+                        });
+                    
+                        function formatTime(seconds) {
+                            let min = Math.floor(seconds / 60);
+                            let sec = Math.floor(seconds % 60);
+                            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                        }
+                    });
+                    </script>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
