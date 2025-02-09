@@ -183,7 +183,7 @@
                         <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="video-link">
                             <div class="video-card">
                                 <div class="video-thumbnail">
-                                    <video wire:ignore id="video_{{ $item->uname }}" class="video-player"
+                                    <video wire:ignore id="video_{{ $item->uname }}" class="video-player w-full rounded-lg"
                                         src="{{ asset('storage/videos/' . $item->video) }}"></video>
                                     <div class="video-duration">
                                         <span wire:model.defer="durations.{{ $item->uname }}">تحميل...</span>
