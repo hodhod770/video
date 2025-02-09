@@ -58,6 +58,11 @@
             overflow: hidden;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* يمنع القص ويعرض الفيديو بالكامل */
+            aspect-ratio: 16/9; /* أو أي نسبة تناسب أبعاد الفيديو */
         }
 
         .video-thumbnail video {
@@ -160,12 +165,11 @@
                     <a href="{{ route('Openv', ['id' => $item->uname]) }}" class="video-link">
                         <div class="card video-card">
                             <div class="video-thumbnail">
-                                <video id="video_{{ $item->uname }}" 
-                                    src="{{ asset('storage/videos/' . $item->video) }}" 
-                                    muted playsinline preload="metadata" 
-                                    class="videorun">
+                                <video id="video_{{ $item->uname }}"
+                                    src="{{ asset('storage/videos/' . $item->video) }}" muted playsinline
+                                    preload="metadata" class="videorun">
                                 </video>
-                                
+
 
                                 <!-- سيتم تحديث مدة الفيديو عبر JavaScript -->
                                 <div class="video-duration">
@@ -193,27 +197,26 @@
                 </div>
             @endforeach
             @section('newjs')
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    let videos = document.querySelectorAll("video");
-                
-                    videos.forEach(video => {
-                        video.addEventListener("loadedmetadata", function () {
-                            let durationElement = document.getElementById(`duration_${video.id}`);
-                            if (durationElement) {
-                                durationElement.textContent = formatTime(video.duration);
-                            }
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        let videos = document.querySelectorAll("video");
+
+                        videos.forEach(video => {
+                            video.addEventListener("loadedmetadata", function() {
+                                let durationElement = document.getElementById(`duration_${video.id}`);
+                                if (durationElement) {
+                                    durationElement.textContent = formatTime(video.duration);
+                                }
+                            });
                         });
+
+                        function formatTime(seconds) {
+                            let min = Math.floor(seconds / 60);
+                            let sec = Math.floor(seconds % 60);
+                            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                        }
                     });
-                
-                    function formatTime(seconds) {
-                        let min = Math.floor(seconds / 60);
-                        let sec = Math.floor(seconds % 60);
-                        return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-                    }
-                });
                 </script>
-                
             @endsection
 
         </div>
